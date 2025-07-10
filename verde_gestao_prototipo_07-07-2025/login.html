@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Protótipo Verde Gestão - Login</title>
+
+  <link
+          rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Conteúdo principal -->
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h1 class="text-center mb-4">Login</h1>
+
+      <!-- Não é pra ser um e-mail aqui, eu reaproveitei o exemplo de login (isso é um placeholder)... -->
+      <form id="formLogin">
+        <div class="form-group">
+          <label for="inputEmail">E-mail</label>
+          <input type="email" class="form-control" id="inputEmail" placeholder="Digite seu e-mail" required>
+        </div>
+
+        <div class="form-group">
+          <label for="inputPassword">Senha</label>
+          <input type="password" class="form-control" id="inputPassword" placeholder="Digite sua senha" required>
+        </div>
+
+        <div class="form-check mb-3">
+          <input type="checkbox" class="form-check-input" id="rememberMe">
+          <label class="form-check-label" for="rememberMe">Lembrar-me</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="forms/login/formLogin.js"></script>
+
+</body>
+</html>
