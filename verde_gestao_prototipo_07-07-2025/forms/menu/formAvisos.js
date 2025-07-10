@@ -2,13 +2,17 @@ function criarFormAviso() {
     return `
             <h1>Cadastrar Novo Aviso</h1>
             
-            <form id="formAviso">
-                <input type="text" id="titulo" class="form-control mb-2" placeholder="Título" required />
-                <textarea id="descricao" class="form-control mb-2" placeholder="Descrição" required></textarea>
-                <button type="submit" class="btn btn-primary">Cadastrar</button>
-            </form>
+            <div class="container mt-4">
             
-            <div id="dockDiv" class="mt-4"> </div>
+                <form id="formAviso">
+                    <input type="text" id="titulo" class="form-control mb-2" placeholder="Título" required />
+                    <textarea id="descricao" class="form-control mb-2" placeholder="Descrição" required></textarea>
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                </form>
+                
+                <div id="dockDiv" class="mt-4"> </div>
+            
+            </div>
         `;
 }
 

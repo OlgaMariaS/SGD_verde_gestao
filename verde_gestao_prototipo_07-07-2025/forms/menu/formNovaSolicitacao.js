@@ -1,7 +1,9 @@
 function criarFormNovaSolicitacao() {
     return `
+        <h1>Cadastrar Nova Solicitação</h1>
+
         <body>
-            <div class="container mt-5">
+            <div class="container mt-4">
                 <form>
                 
                     <div class="form-row">

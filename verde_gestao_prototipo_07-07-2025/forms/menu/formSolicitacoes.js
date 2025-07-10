@@ -1,5 +1,7 @@
 function criarFormSolicitacoes() {
     return `
+        <h1>Consultar Solicitações</h1>
+        
         <body>
             <div class="container mt-4">
             
@@ -45,20 +47,20 @@ function criarFormSolicitacoes() {
         `
 }
 
-function refazerTabelaSolicitacoes(data) {
-    const tbody = document.querySelector('#dadosTabela tbody');
-    tbody.innerHTML = '';
-    data.forEach(req => {
+function refazerTabelaSolicitacoes(dadosBD) {
+    const corpoCodigo = document.querySelector('#dadosTabela tbody');
+    corpoCodigo.innerHTML = '';
+    dadosBD.forEach(dado => {
         const row =
             `<tr class="clickable-row">
-                    <td>${req.codigo}</td>
-                    <td>${req.categoria}</td>
-                    <td>${req.solicitante}</td>
-                    <td>${req.responsavel}</td>
-                    <td>${req.status}</td>
-                    <td>${req.data}</td>
+                    <td>${dado.codigo}</td>
+                    <td>${dado.categoria}</td>
+                    <td>${dado.solicitante}</td>
+                    <td>${dado.responsavel}</td>
+                    <td>${dado.status}</td>
+                    <td>${dado.data}</td>
                 </tr>`;
-        tbody.insertAdjacentHTML('beforeend', row);
+        corpoCodigo.insertAdjacentHTML('beforeend', row);
     });
 }
 
