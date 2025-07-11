@@ -24,6 +24,17 @@ public class DatabaseMigrationRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        /*  Todo: Fazer uma função que verifica a versão do banco de dados através do próprio banco.
+            pra ver se vai atualizar.
+        */
+        String sqlCheck = "SELECT to_regclass('public.usuario')";
+        String tableName = jdbcTemplate.queryForObject(sqlCheck, String.class);
+
+        if (tableName != null) {
+            System.out.println("⚠️ Migração já aplicada. Pulando execução.");
+            return;
+        }
+
         String sql = Files.readString(migrationScript.getFile().toPath(), StandardCharsets.UTF_8);
 
         String[] statements = sql.split(";");
@@ -42,4 +53,5 @@ public class DatabaseMigrationRunner implements ApplicationRunner {
 
         System.out.println("✅ Migrações executadas com sucesso!");
     }
+
 }
