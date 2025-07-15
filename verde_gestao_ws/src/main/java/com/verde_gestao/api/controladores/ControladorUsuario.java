@@ -1,7 +1,8 @@
 package com.verde_gestao.api.controladores;
 
 import com.verde_gestao.api.objetos.Usuario;
-import com.verde_gestao.api.repositorios.RepositorioUsuario;
+import com.verde_gestao.api.servicos.ServicoUsuario;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,59 +11,58 @@ import java.util.List;
 @RequestMapping("/usuarios")
 public class ControladorUsuario {
 
-    private final RepositorioUsuario repositorioUsuario;
+    private final ServicoUsuario servicoUsuario;
 
-    public ControladorUsuario(RepositorioUsuario repositorioUsuario) {
-        this.repositorioUsuario = repositorioUsuario;
+    public ControladorUsuario(ServicoUsuario servicoUsuario) {
+        this.servicoUsuario = servicoUsuario;
     }
 
     @GetMapping
     public List<Usuario> getTodosUsuarios() {
-        return repositorioUsuario.buscarTodosUsuarios();
+        return servicoUsuario.buscarTodosUsuarios();
     }
 
     @GetMapping("/{id}")
-    public Usuario getUsuarioPorId(@PathVariable("id") int usuarioId) {
-        return repositorioUsuario.buscarUsuarioPorId(usuarioId);
+    public Usuario getUsuarioPorId(@PathVariable("id") int id) {
+        return servicoUsuario.buscarUsuarioPorId(id);
     }
 
     @GetMapping("/buscarPorNome")
     public Usuario getUsuarioPorNome(@RequestParam String nome) {
-        return repositorioUsuario.buscarUsuarioPorNome(nome);
+        return servicoUsuario.buscarUsuarioPorNome(nome);
     }
 
     @GetMapping("/existe")
     public boolean usuarioExiste(@RequestParam String nome) {
-        return repositorioUsuario.usuarioExiste(nome);
+        return servicoUsuario.usuarioExiste(nome);
     }
 
     @GetMapping("/verificarLogin")
     public boolean verificarLogin(@RequestParam String nome, @RequestParam String senha) {
-        return repositorioUsuario.verificarLogin(nome, senha);
+        return servicoUsuario.verificarLogin(nome, senha);
     }
 
     @PostMapping
-    public String inserirUsuario(@RequestBody Usuario usuario) {
-        int result = repositorioUsuario.inserirUsuario(usuario);
-        return result > 0 ? "Usuário inserido com sucesso!" : "Erro ao inserir usuário.";
+    public ResponseEntity<String> inserirUsuario(@RequestBody Usuario usuario) {
+        servicoUsuario.inserirUsuario(usuario);
+        return ResponseEntity.ok("Usuário inserido com sucesso!");
     }
 
     @PutMapping("/{id}")
-    public String atualizarUsuario(@PathVariable("id") int usuarioId, @RequestBody Usuario usuario) {
-        usuario.setUsuarioId(usuarioId);
-        int result = repositorioUsuario.atualizarUsuario(usuario);
-        return result > 0 ? "Usuário atualizado com sucesso!" : "Erro ao atualizar usuário.";
+    public ResponseEntity<String> atualizarUsuario(@PathVariable("id") int id, @RequestBody Usuario usuario) {
+        servicoUsuario.atualizarUsuario(id, usuario);
+        return ResponseEntity.ok("Usuário atualizado com sucesso!");
     }
 
     @DeleteMapping("/{id}")
-    public String deletarUsuario(@PathVariable("id") int usuarioId) {
-        int result = repositorioUsuario.deletarUsuario(usuarioId);
-        return result > 0 ? "Usuário deletado com sucesso!" : "Erro ao deletar usuário.";
+    public ResponseEntity<String> deletarUsuario(@PathVariable("id") int id) {
+        servicoUsuario.deletarUsuario(id);
+        return ResponseEntity.ok("Usuário deletado com sucesso!");
     }
 
     @GetMapping("/existeAdmin")
     public boolean existeAdministrador() {
-        return repositorioUsuario.existeAdministrador();
+        return servicoUsuario.existeAdministrador();
     }
 
 }
