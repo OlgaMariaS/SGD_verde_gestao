@@ -1,5 +1,6 @@
 package com.verde_gestao.api.repositorios;
 
+import com.verde_gestao.api.dto.ResponseCardAviso;
 import com.verde_gestao.api.objetos.Aviso;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -94,6 +95,21 @@ public class RepositorioAviso {
         return jdbcTemplate.update(sql, avisoId);
     }
 
+    // Todo: montar o SQL que busca os avisos.
+    public List<ResponseCardAviso> buscarTodosCardsAvisos() {
+        String sql = """
+            SELECT 
+                avisoid, 
+                autorusuarioid, 
+                texto, 
+                datainicio, 
+                datafim 
+            FROM aviso 
+            ORDER BY datainicio DESC
+            """;
+        return jdbcTemplate.query(sql, new ResponseCardAvisoRowMapper());
+    }
+
     private static class AvisoRowMapper implements RowMapper<Aviso> {
         @Override
         public Aviso mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -104,6 +120,18 @@ public class RepositorioAviso {
             aviso.setDataInicio(rs.getString("datainicio"));
             aviso.setDataFim(rs.getString("datafim"));
             return aviso;
+        }
+    }
+
+    private static class ResponseCardAvisoRowMapper implements RowMapper<ResponseCardAviso> {
+        @Override
+        public ResponseCardAviso mapRow(ResultSet rs, int rowNum) throws SQLException {
+            ResponseCardAviso responseCardAviso = new ResponseCardAviso();
+            responseCardAviso.setId(rs.getInt("avisoid"));
+            responseCardAviso.setUsuario(rs.getString("autorusuarioid"));
+            responseCardAviso.setMensagem(rs.getString("texto"));
+            responseCardAviso.setDataHora(rs.getString("datainicio"));
+            return responseCardAviso;
         }
     }
 

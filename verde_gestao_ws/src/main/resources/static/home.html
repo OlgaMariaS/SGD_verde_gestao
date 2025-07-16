@@ -13,12 +13,13 @@
         <div class="sidebar-heading p-3">Menu</div>
         <div class="list-group list-group-flush">
             <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Início')">Início</button>
+            <div class="dropdown-divider"></div>
             <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Avisos')">Avisos</button>
+            <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Categoria de Documentos')">Categoria de Documentos</button>
+            <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Configurações')">Configurações</button>
             <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Consultar Solicitações')">Consultar Solicitações</button>
             <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Usuários')">Usuários</button>
-            <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Categoria de Documentos')">Categoria de Documentos</button>
             <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Seções')">Seções</button>
-            <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Configurações')">Configurações</button>
         </div>
     </div>
 
@@ -46,19 +47,19 @@
                 atualizarConteudoHtml(htmlAvisos(), configurarAvisos);
                 break;
 
+            case 'Categoria de Documentos':
+                break;
+
+            case 'Configurações':
+                break;
+
             case 'Consultar Solicitações':
                 break;
 
             case 'Usuários':
                 break;
 
-            case 'Categoria de Documentos':
-                break;
-
             case 'Seções':
-                break;
-
-            case 'Configurações':
                 break;
 
             default:

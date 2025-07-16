@@ -17,12 +17,12 @@ public class ControladorComentario {
     }
 
     @GetMapping("/solicitacao/{solicitacaoId}")
-    public List<Comentario> getComentariosPorSolicitacao(@PathVariable("solicitacaoId") int solicitacaoId) {
+    public List<Comentario> buscarComentariosPorSolicitacao(@PathVariable("solicitacaoId") int solicitacaoId) {
         return repositorioComentario.buscarComentariosPorSolicitacao(solicitacaoId);
     }
 
     @GetMapping("/{id}")
-    public Comentario getComentarioPorId(@PathVariable("id") int comentarioId) {
+    public Comentario buscarComentarioPorId(@PathVariable("id") int comentarioId) {
         return repositorioComentario.buscarComentarioPorId(comentarioId);
     }
 

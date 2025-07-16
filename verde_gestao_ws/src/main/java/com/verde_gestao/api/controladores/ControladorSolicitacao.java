@@ -17,22 +17,22 @@ public class ControladorSolicitacao {
     }
 
     @GetMapping
-    public List<Solicitacao> getTodasSolicitacoes() {
+    public List<Solicitacao> buscarTodasSolicitacoes() {
         return repositorioSolicitacao.buscarTodasSolicitacoes();
     }
 
     @GetMapping("/{id}")
-    public Solicitacao getSolicitacaoPorId(@PathVariable("id") int solicitacaoId) {
+    public Solicitacao buscarSolicitacaoPorId(@PathVariable("id") int solicitacaoId) {
         return repositorioSolicitacao.buscarSolicitacaoPorId(solicitacaoId);
     }
 
     @GetMapping("/criador/{criadorId}")
-    public List<Solicitacao> getSolicitacoesPorCriador(@PathVariable("criadorId") int criadorUsuarioId) {
+    public List<Solicitacao> buscarSolicitacoesPorCriador(@PathVariable("criadorId") int criadorUsuarioId) {
         return repositorioSolicitacao.buscarSolicitacoesPorCriador(criadorUsuarioId);
     }
 
     @GetMapping("/responsavel/{responsavelId}")
-    public List<Solicitacao> getSolicitacoesPorResponsavel(@PathVariable("responsavelId") int responsavelUsuarioId) {
+    public List<Solicitacao> buscarSolicitacoesPorResponsavel(@PathVariable("responsavelId") int responsavelUsuarioId) {
         return repositorioSolicitacao.buscarSolicitacoesPorResponsavel(responsavelUsuarioId);
     }
 

@@ -1,6 +1,6 @@
 // Todo: fazer essa classe funcionar com o banco de dados.
 
-const listaAvisos = [];
+var listaAvisos = [];
 
 function htmlAvisos() {
     return `
@@ -33,7 +33,9 @@ function htmlAvisos() {
     `;
 }
 
-function htmlCardAviso() {
+function htmlCardAviso(aviso) {
+    //Todo: isolar essa dependência de injeção de aviso, se possível.
+
     return `
         <div class="card-body">
             <h5 class="card-title">${aviso.titulo} <small class="text-muted" style="font-size: 0.9em;">${aviso.data}</small></h5>
@@ -83,8 +85,35 @@ function atualizarAvisos() {
     listaAvisos.forEach(aviso => {
         const cardAviso = document.createElement("div");
         cardAviso.className = "card mb-3";
-        cardAviso.innerHTML = htmlCardAviso();
+        cardAviso.innerHTML = htmlCardAviso(aviso);
 
         containerAvisos.appendChild(cardAviso);
     });
+}
+
+
+// Todo: criar DTOs para retornar estes dados formatados, pelo amor de Deus.
+function buscarAvisos() {
+    apiRequest(`/avisos/getTodosAvisos`)
+        .then(listaResponseCardAviso => {
+            listaAvisos = [];
+
+            listaResponseCardAviso.forEach(responseCardAviso => {
+                const novoAviso = {
+                    id:      responseCardAviso.id,
+                    titulo:  responseCardAviso.titulo,
+                    texto:   responseCardAviso.texto,
+                    usuario: responseCardAviso.usuario,
+                    data:    responseCardAviso.data
+                };
+
+                listaAvisos.push(novoAviso);
+            });
+        })
+        .catch(erro => {
+            const mensagemErro = "Erro ao tentar recuperar os avisos!";
+
+            console.error(mensagemErro, erro);
+            alert(mensagemErro);
+        });
 }

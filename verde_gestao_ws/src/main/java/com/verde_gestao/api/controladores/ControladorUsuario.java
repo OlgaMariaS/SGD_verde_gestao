@@ -18,17 +18,17 @@ public class ControladorUsuario {
     }
 
     @GetMapping
-    public List<Usuario> getTodosUsuarios() {
+    public List<Usuario> buscarTodosUsuarios() {
         return servicoUsuario.buscarTodosUsuarios();
     }
 
     @GetMapping("/{id}")
-    public Usuario getUsuarioPorId(@PathVariable("id") int id) {
+    public Usuario buscarUsuarioPorId(@PathVariable("id") int id) {
         return servicoUsuario.buscarUsuarioPorId(id);
     }
 
     @GetMapping("/buscarPorNome")
-    public Usuario getUsuarioPorNome(@RequestParam String nome) {
+    public Usuario buscarUsuarioPorNome(@RequestParam String nome) {
         return servicoUsuario.buscarUsuarioPorNome(nome);
     }
 

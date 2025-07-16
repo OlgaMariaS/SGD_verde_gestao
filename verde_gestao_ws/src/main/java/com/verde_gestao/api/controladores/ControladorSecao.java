@@ -17,17 +17,17 @@ public class ControladorSecao {
     }
 
     @GetMapping
-    public List<Secao> getTodasSecoes() {
+    public List<Secao> buscarTodasSecoes() {
         return repositorioSecao.buscarTodasSecoes();
     }
 
     @GetMapping("/{id}")
-    public Secao getSecaoPorId(@PathVariable("id") int secaoId) {
+    public Secao buscarSecaoPorId(@PathVariable("id") int secaoId) {
         return repositorioSecao.buscarSecaoPorId(secaoId);
     }
 
     @GetMapping("/buscarPorDescricao")
-    public Secao getSecaoPorDescricao(@RequestParam String descricao) {
+    public Secao buscarSecaoPorDescricao(@RequestParam String descricao) {
         return repositorioSecao.buscarSecaoPorDescricao(descricao);
     }
 
