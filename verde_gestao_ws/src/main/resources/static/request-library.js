@@ -13,7 +13,7 @@ function apiRequest(url, method = "GET", body = null) {
     return fetch(url, options)
         .then(res => {
             if (!res.ok) throw new Error(`Erro: ${res.status}`);
-            return res.text();
+            return res.json();
         });
 }
 
@@ -114,6 +114,7 @@ function apiRequest(url, method = "GET", body = null) {
                 console.log("Resposta ao deletar:", msg);
               })
               .catch(err => console.error(err));
+
 
     👑 Vê se tem administrador no BD:
     apiRequest("http://localhost:8080/existeAdmin")

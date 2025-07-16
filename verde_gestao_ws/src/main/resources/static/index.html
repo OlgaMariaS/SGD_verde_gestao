@@ -24,23 +24,15 @@
     </div>
 </div>
 
+<script src="request-library.js"></script>
 <script>
     document.getElementById("loginForm").addEventListener("submit", function(e) {
         e.preventDefault();
 
-        const nome = document.getElementById("username").value;
-        const senha = document.getElementById("password").value;
+        const nomeLogin = document.getElementById("username").value;
+        const senhaLogin = document.getElementById("password").value;
 
-        // Prestar atenção que essas requisições precisam ter o prefixo do controlador antes hein...
-        const url = `/usuarios/verificarLogin?nome=${encodeURIComponent(nome)}&senha=${encodeURIComponent(senha)}`;
-
-        fetch(url)
-            .then(resposta => {
-                if (!resposta.ok) {
-                    throw new Error("Erro na requisição");
-                }
-                return resposta.json();
-            })
+        apiRequest(`/usuarios/verificarLogin?nome=${encodeURIComponent(nomeLogin)}&senha=${encodeURIComponent(senhaLogin)}`)
             .then(booleanRetornada => {
                 if (booleanRetornada) {
                     window.location.href = "home.html";
