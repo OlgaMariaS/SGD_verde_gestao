@@ -1,10 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Login - Verde Gestão</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="d-flex">
+    <!-- Menu lateral -->
+    <div id="sidebar" class="bg-light border-right" style="width: 200px; height: 100vh;">
+        <div class="sidebar-heading p-3">Menu</div>
+        <div class="list-group list-group-flush">
+            <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Início')">Início</button>
+            <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Avisos')">Avisos</button>
+            <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Consultar Solicitações')">Consultar Solicitações</button>
+            <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Usuários')">Usuários</button>
+            <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Categoria de Documentos')">Categoria de Documentos</button>
+            <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Seções')">Seções</button>
+            <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Configurações')">Configurações</button>
+        </div>
+    </div>
 
+    <!-- Conteúdo principal -->
+    <div id="content" class="flex-grow-1 p-4">
+    </div>
+</div>
+
+<script src="request-library.js"></script>
+<script src="templates/template-inicio.js"></script>
+<script src="templates/template-avisos.js"></script>
+<script>
+    function atualizarConteudoHtml(html, callback) {
+        document.getElementById("content").innerHTML = html;
+        callback()
+    }
+
+    function opcaoSelecionada(opcao) {
+        switch (opcao) {
+            case 'Início':
+                atualizarConteudoHtml(htmlInicio(), configurarInicio);
+                break;
+
+            case 'Avisos':
+                atualizarConteudoHtml(htmlAvisos(), configurarAvisos);
+                break;
+
+            case 'Consultar Solicitações':
+                break;
+
+            case 'Usuários':
+                break;
+
+            case 'Categoria de Documentos':
+                break;
+
+            case 'Seções':
+                break;
+
+            case 'Configurações':
+                break;
+
+            default:
+                break;
+        }
+    }
+</script>
 </body>
 </html>

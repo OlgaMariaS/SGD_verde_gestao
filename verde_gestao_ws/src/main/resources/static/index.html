@@ -26,6 +26,8 @@
 
 <script src="request-library.js"></script>
 <script>
+    // Este é o exemplo universal (deste projeto) de como criar uma tela em Javascript que conversa com o Java.
+
     document.getElementById("loginForm").addEventListener("submit", function(e) {
         e.preventDefault();
 
@@ -39,7 +41,7 @@
                 } else {
                     alert("Usuário ou senha inválidos!");
                 }
-            })
+            }) // É possível concatenar vários "then".
             .catch(erro => {
                 console.error("Erro ao verificar login:", erro);
                 alert("Erro ao conectar ao servidor.");
