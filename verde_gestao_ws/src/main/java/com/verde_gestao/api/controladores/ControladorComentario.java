@@ -1,6 +1,6 @@
 package com.verde_gestao.api.controladores;
 
-import com.verde_gestao.api.objetos.Comentario;
+import com.verde_gestao.api.objetos.modelo.Comentario;
 import com.verde_gestao.api.repositorios.RepositorioComentario;
 import org.springframework.web.bind.annotation.*;
 

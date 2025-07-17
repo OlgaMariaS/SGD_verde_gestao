@@ -1,7 +1,7 @@
 package com.verde_gestao.api.repositorios;
 
-import com.verde_gestao.api.dto.ResponseCardAviso;
-import com.verde_gestao.api.objetos.Aviso;
+import com.verde_gestao.api.objetos.dto.ResponseCardAviso;
+import com.verde_gestao.api.objetos.modelo.Aviso;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -25,6 +25,7 @@ public class RepositorioAviso {
             SELECT 
                 avisoid, 
                 autorusuarioid, 
+                titulo, 
                 texto, 
                 datainicio, 
                 datafim 
@@ -39,6 +40,7 @@ public class RepositorioAviso {
             SELECT 
                 avisoid, 
                 autorusuarioid, 
+                titulo, 
                 texto, 
                 datainicio, 
                 datafim 
@@ -56,6 +58,7 @@ public class RepositorioAviso {
         String sql = """
             INSERT INTO aviso (
                 autorusuarioid, 
+                titulo, 
                 texto, 
                 datainicio, 
                 datafim
@@ -63,6 +66,7 @@ public class RepositorioAviso {
             """;
         return jdbcTemplate.update(sql,
                 aviso.getAutorUsuarioId(),
+                aviso.getTitulo(),
                 aviso.getTexto(),
                 aviso.getDataInicio(),
                 aviso.getDataFim()
@@ -73,6 +77,7 @@ public class RepositorioAviso {
         String sql = """
             UPDATE aviso 
             SET autorusuarioid = ?, 
+                titulo = ?, 
                 texto = ?, 
                 datainicio = ?, 
                 datafim = ? 
@@ -80,6 +85,7 @@ public class RepositorioAviso {
             """;
         return jdbcTemplate.update(sql,
                 aviso.getAutorUsuarioId(),
+                aviso.getTitulo(),
                 aviso.getTexto(),
                 aviso.getDataInicio(),
                 aviso.getDataFim(),
@@ -95,18 +101,18 @@ public class RepositorioAviso {
         return jdbcTemplate.update(sql, avisoId);
     }
 
-    // Todo: montar o SQL que busca os avisos.
     public List<ResponseCardAviso> buscarTodosCardsAvisos() {
         String sql = """
-            SELECT 
-                avisoid, 
-                autorusuarioid, 
-                texto, 
-                datainicio, 
-                datafim 
-            FROM aviso 
-            ORDER BY datainicio DESC
-            """;
+        SELECT
+            avisoid,
+            nome,
+            titulo,
+            texto,
+            to_char(data_inicio, 'DD/MM/YYYY HH24:MI') as data_texto
+        FROM aviso
+        JOIN usuario ON autor_usuarioid = usuarioid
+        ORDER BY data_inicio DESC
+        """;
         return jdbcTemplate.query(sql, new ResponseCardAvisoRowMapper());
     }
 
@@ -116,6 +122,7 @@ public class RepositorioAviso {
             Aviso aviso = new Aviso();
             aviso.setAvisoId(rs.getInt("avisoid"));
             aviso.setAutorUsuarioId(rs.getInt("autorusuarioid"));
+            aviso.setTitulo(rs.getString("titulo"));
             aviso.setTexto(rs.getString("texto"));
             aviso.setDataInicio(rs.getString("datainicio"));
             aviso.setDataFim(rs.getString("datafim"));
@@ -128,9 +135,10 @@ public class RepositorioAviso {
         public ResponseCardAviso mapRow(ResultSet rs, int rowNum) throws SQLException {
             ResponseCardAviso responseCardAviso = new ResponseCardAviso();
             responseCardAviso.setId(rs.getInt("avisoid"));
-            responseCardAviso.setUsuario(rs.getString("autorusuarioid"));
-            responseCardAviso.setMensagem(rs.getString("texto"));
-            responseCardAviso.setDataHora(rs.getString("datainicio"));
+            responseCardAviso.setUsuario(rs.getString("nome"));
+            responseCardAviso.setTitulo(rs.getString("titulo"));
+            responseCardAviso.setTexto(rs.getString("texto"));
+            responseCardAviso.setData(rs.getString("data_texto"));
             return responseCardAviso;
         }
     }

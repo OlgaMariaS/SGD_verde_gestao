@@ -1,4 +1,4 @@
-package com.verde_gestao.api.objetos;
+package com.verde_gestao.api.objetos.modelo;
 
 import lombok.Data;
 

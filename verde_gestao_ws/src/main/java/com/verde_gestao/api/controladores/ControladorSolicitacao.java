@@ -1,6 +1,6 @@
 package com.verde_gestao.api.controladores;
 
-import com.verde_gestao.api.objetos.Solicitacao;
+import com.verde_gestao.api.objetos.modelo.Solicitacao;
 import com.verde_gestao.api.repositorios.RepositorioSolicitacao;
 import org.springframework.web.bind.annotation.*;
 

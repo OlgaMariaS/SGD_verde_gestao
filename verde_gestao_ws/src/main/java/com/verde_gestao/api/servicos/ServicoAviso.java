@@ -1,7 +1,7 @@
 package com.verde_gestao.api.servicos;
 
-import com.verde_gestao.api.dto.ResponseCardAviso;
-import com.verde_gestao.api.objetos.Aviso;
+import com.verde_gestao.api.objetos.dto.ResponseCardAviso;
+import com.verde_gestao.api.objetos.modelo.Aviso;
 import com.verde_gestao.api.repositorios.RepositorioAviso;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

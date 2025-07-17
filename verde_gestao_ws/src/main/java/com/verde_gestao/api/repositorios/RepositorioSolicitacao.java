@@ -1,6 +1,6 @@
 package com.verde_gestao.api.repositorios;
 
-import com.verde_gestao.api.objetos.Solicitacao;
+import com.verde_gestao.api.objetos.modelo.Solicitacao;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;

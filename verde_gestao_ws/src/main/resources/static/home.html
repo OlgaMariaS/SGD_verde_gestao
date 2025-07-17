@@ -12,8 +12,10 @@
     <div id="sidebar" class="bg-light border-right" style="width: 200px; height: 100vh;">
         <div class="sidebar-heading p-3">Menu</div>
         <div class="list-group list-group-flush">
+            <div class="dropdown-divider"></div>
             <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Início')">Início</button>
             <div class="dropdown-divider"></div>
+
             <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Avisos')">Avisos</button>
             <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Categoria de Documentos')">Categoria de Documentos</button>
             <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Configurações')">Configurações</button>
@@ -28,15 +30,12 @@
     </div>
 </div>
 
-<script src="request-library.js"></script>
-<script src="templates/template-inicio.js"></script>
-<script src="templates/template-avisos.js"></script>
+<script src="common/utils.js"></script>
+<script src="templates/inicio/html-inicio.js"></script>
+<script src="templates/avisos/html-avisos.js"></script>
+<script src="templates/inicio/template-inicio.js"></script>
+<script src="templates/avisos/template-avisos.js"></script>
 <script>
-    function atualizarConteudoHtml(html, callback) {
-        document.getElementById("content").innerHTML = html;
-        callback()
-    }
-
     function opcaoSelecionada(opcao) {
         switch (opcao) {
             case 'Início':

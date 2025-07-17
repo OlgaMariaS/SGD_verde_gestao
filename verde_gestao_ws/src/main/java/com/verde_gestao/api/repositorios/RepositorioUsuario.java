@@ -1,6 +1,7 @@
 package com.verde_gestao.api.repositorios;
 
-import com.verde_gestao.api.objetos.Usuario;
+import com.verde_gestao.api.objetos.dto.ResponseUsuarioLogado;
+import com.verde_gestao.api.objetos.modelo.Usuario;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -153,6 +154,28 @@ public class RepositorioUsuario {
         return count != null && count > 0;
     }
 
+    public List<ResponseUsuarioLogado> buscarUsuarioLogado(nome, senha) {
+        String sql = """
+            SELECT
+                u.usuarioid,
+                u.administrador,
+                u.nome,
+                u.senha,
+                u.tipousuarioid,
+                u.secaoid,
+                t.tipousuarioid,
+                t.descricao,
+                s.secaoid,
+                s.descricao,
+                t.descricao AS tipo,
+                s.descricao AS secao
+            FROM USUARIO u
+            JOIN tipo_usuario t ON t.tipousuarioid = u.tipousuarioid
+            JOIN secao s ON s.secaoid = u.secaoid
+            """;
+        return jdbcTemplate.query(sql, new ResponseUsuarioLogadoRowMapper());
+    }
+
     private static class UsuarioRowMapper implements RowMapper<Usuario> {
         @Override
         public Usuario mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -164,6 +187,19 @@ public class RepositorioUsuario {
             usuario.setTipoUsuarioId(rs.getInt("tipousuarioid"));
             usuario.setSecaoId(rs.getInt("secaoid"));
             return usuario;
+        }
+    }
+
+    private static class ResponseUsuarioLogadoRowMapper implements RowMapper<ResponseUsuarioLogado> {
+        @Override
+        public ResponseUsuarioLogado mapRow(ResultSet rs, int rowNum) throws SQLException {
+            ResponseUsuarioLogado responseUsuarioLogado = new ResponseUsuarioLogado();
+            responseUsuarioLogado.setUsuarioId(rs.getInt("usuarioid"));
+            responseUsuarioLogado.setAdministrador(rs.getBoolean("administrador"));
+            responseUsuarioLogado.setNome(rs.getString("nome"));
+            responseUsuarioLogado.setTipoUsuario(rs.getString("tipousuarioid"));
+            responseUsuarioLogado.setSecao(rs.getString("secaoid"));
+            return responseUsuarioLogado;
         }
     }
 

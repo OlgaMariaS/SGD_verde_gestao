@@ -81,6 +81,7 @@ CREATE TABLE "comentario" (
 CREATE TABLE "aviso" (
     "avisoid" BIGINT NOT NULL,
     "autor_usuarioid" BIGINT NOT NULL,
+    "titulo" VARCHAR(255) NOT NULL,
     "texto" VARCHAR(255) NOT NULL,
     "data_inicio" DATE NOT NULL,
     "data_fim" DATE NOT NULL,

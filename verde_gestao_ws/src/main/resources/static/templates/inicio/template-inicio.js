@@ -1,0 +1,3 @@
+function configurarInicio() {
+    buscarAvisos()
+}

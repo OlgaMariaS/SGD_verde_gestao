@@ -1,6 +1,6 @@
 package com.verde_gestao.api.controladores;
 
-import com.verde_gestao.api.objetos.Secao;
+import com.verde_gestao.api.objetos.modelo.Secao;
 import com.verde_gestao.api.repositorios.RepositorioSecao;
 import org.springframework.web.bind.annotation.*;
 
