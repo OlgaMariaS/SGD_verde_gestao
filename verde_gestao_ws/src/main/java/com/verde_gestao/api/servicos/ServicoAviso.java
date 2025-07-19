@@ -4,6 +4,7 @@ import com.verde_gestao.api.objetos.dto.CardAvisoDTO;
 import com.verde_gestao.api.objetos.modelo.Aviso;
 import com.verde_gestao.api.repositorios.RepositorioAviso;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -45,8 +46,8 @@ public class ServicoAviso {
         repositorioAviso.deletarAviso(avisoId);
     }
 
-    public List<CardAvisoDTO> buscarTodosCardsAvisos() {
-        return repositorioAviso.buscarTodosCardsAvisos();
+    public ResponseEntity<List<CardAvisoDTO>> buscarTodosCardsAvisos() {
+        return ResponseEntity.ok(repositorioAviso.buscarTodosCardsAvisos());
     }
 
 }

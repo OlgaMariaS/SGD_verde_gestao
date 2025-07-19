@@ -48,7 +48,7 @@ public class ControladorAviso {
     }
 
     @GetMapping("/buscarTodosCardsAvisos")
-    public List<CardAvisoDTO> buscarTodosCardsAvisos() {
+    public ResponseEntity<List<CardAvisoDTO>> buscarTodosCardsAvisos() {
         return servicoAviso.buscarTodosCardsAvisos();
     }
 

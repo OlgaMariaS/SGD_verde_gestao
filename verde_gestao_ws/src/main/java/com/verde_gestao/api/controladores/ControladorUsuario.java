@@ -23,6 +23,11 @@ public class ControladorUsuario {
         return servicoUsuario.buscarTodosUsuarios();
     }
 
+    @GetMapping("/verificarLogin")
+    public ResponseEntity<UsuarioLogadoDTO> verificarLogin(@RequestParam String nome, @RequestParam String senha) {
+        return servicoUsuario.verificarLogin(nome, senha);
+    }
+
     @GetMapping("/{id}")
     public Usuario buscarUsuarioPorId(@PathVariable("id") int id) {
         return servicoUsuario.buscarUsuarioPorId(id);
@@ -36,11 +41,6 @@ public class ControladorUsuario {
     @GetMapping("/existe")
     public boolean usuarioExiste(@RequestParam String nome) {
         return servicoUsuario.usuarioExiste(nome);
-    }
-
-    @GetMapping("/verificarLogin")
-    public ResponseEntity<UsuarioLogadoDTO> verificarLogin(@RequestParam String nome, @RequestParam String senha) {
-        return servicoUsuario.verificarLogin(nome, senha);
     }
 
     @PostMapping

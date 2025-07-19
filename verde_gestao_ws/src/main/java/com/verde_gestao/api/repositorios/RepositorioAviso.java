@@ -64,14 +64,14 @@ public class RepositorioAviso {
             Date dataFim = formatoBrasileiro.parse(aviso.getDataFim());
 
             String sql = """
-            INSERT INTO aviso (
-                autor_usuarioid, 
-                titulo, 
-                texto, 
-                data_inicio, 
-                data_fim
-            ) VALUES (?, ?, ?, ?, ?)
-        """;
+                INSERT INTO aviso (
+                    autor_usuarioid, 
+                    titulo, 
+                    texto, 
+                    data_inicio, 
+                    data_fim
+                ) VALUES (?, ?, ?, ?, ?)
+                """;
 
             jdbcTemplate.update(sql,
                     aviso.getAutorUsuarioId(),
@@ -107,24 +107,24 @@ public class RepositorioAviso {
 
     public void deletarAviso(int avisoId) {
         String sql = """
-            DELETE FROM aviso 
-            WHERE avisoid = ?
-            """;
+           DELETE FROM aviso 
+           WHERE avisoid = ?
+           """;
         jdbcTemplate.update(sql, avisoId);
     }
 
     public List<CardAvisoDTO> buscarTodosCardsAvisos() {
         String sql = """
-        SELECT
-            avisoid,
-            nome,
-            titulo,
-            texto,
-            to_char(data_inicio, 'DD/MM/YYYY') as data_texto
-        FROM aviso
-        JOIN usuario ON autor_usuarioid = usuarioid
-        ORDER BY data_inicio DESC
-        """;
+            SELECT
+                avisoid,
+                nome,
+                titulo,
+                texto,
+                to_char(data_inicio, 'DD/MM/YYYY') as data_texto
+            FROM aviso
+            JOIN usuario ON autor_usuarioid = usuarioid
+            ORDER BY data_inicio DESC
+            """;
         return jdbcTemplate.query(sql, new ResponseCardAvisoRowMapper());
     }
 

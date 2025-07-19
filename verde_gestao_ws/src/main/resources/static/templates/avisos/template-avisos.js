@@ -24,7 +24,7 @@ function configurarAvisos() {
     });
 }
 
-function criarCardAvisos() {
+function instanciarCardAvisos() {
     const containerAvisos = document.getElementById("lista-avisos");
     containerAvisos.innerHTML = "";
 
@@ -39,22 +39,22 @@ function criarCardAvisos() {
 
 function buscarAvisos() {
     requisitarAPI(`/avisos/buscarTodosCardsAvisos`)
-        .then(listaResponseCardAviso => {
+        .then(listaCardAviso => {
             listaAvisos = [];
 
-            listaResponseCardAviso.forEach(responseCardAviso => {
+            listaCardAviso.forEach(cardAviso => {
                 const novoCardAviso = {
-                    id: responseCardAviso.id,
-                    titulo: responseCardAviso.titulo,
-                    texto: responseCardAviso.texto,
-                    usuario: responseCardAviso.usuario,
-                    data: responseCardAviso.data
+                    id: cardAviso.id,
+                    titulo: cardAviso.titulo,
+                    texto: cardAviso.texto,
+                    usuario: cardAviso.usuario,
+                    data: cardAviso.data
                 };
 
                 listaAvisos.unshift(novoCardAviso);
             });
 
-            criarCardAvisos();
+            instanciarCardAvisos();
         }).catch(erro => {});
 }
 

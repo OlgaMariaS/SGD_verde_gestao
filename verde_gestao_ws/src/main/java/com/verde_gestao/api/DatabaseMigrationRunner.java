@@ -24,9 +24,6 @@ public class DatabaseMigrationRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        /*  Todo: Fazer uma função que verifica a versão do banco de dados através do próprio banco.
-            pra ver se vai atualizar.
-        */
         String sqlCheck = "SELECT to_regclass('public.usuario')";
         String tableName = jdbcTemplate.queryForObject(sqlCheck, String.class);
 
