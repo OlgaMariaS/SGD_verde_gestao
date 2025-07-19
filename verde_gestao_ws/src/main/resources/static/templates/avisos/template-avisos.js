@@ -1,4 +1,4 @@
-var listaAvisos = [];
+let listaAvisos = [];
 
 function configurarAvisos() {
     document.getElementById("form-aviso").addEventListener("submit", function(evento) {
@@ -7,6 +7,7 @@ function configurarAvisos() {
         const tituloAviso = document.getElementById("campo-titulo").value;
         const mensagem = document.getElementById("campo-mensagem").value;
         const dataHora = new Date().toLocaleString("pt-BR");
+        const usuarioLogado = recuperarLocalmente('usuarioLogado');
 
         const aviso = {
             avisoId: 0,
@@ -50,7 +51,7 @@ function buscarAvisos() {
                     data: responseCardAviso.data
                 };
 
-                listaAvisos.push(novoCardAviso);
+                listaAvisos.unshift(novoCardAviso);
             });
 
             criarCardAvisos();
@@ -58,13 +59,15 @@ function buscarAvisos() {
 }
 
 function inserirAviso(aviso) {
-    requisitarAPI(`/avisos/${aviso}`, "POST")
-        .then(resposta => {buscarAvisos();})
+    console.log(aviso)
+
+    requisitarAPI(`/avisos`, "POST", aviso)
+        .then(resposta => {buscarAvisos()})
         .catch(erro => {});
 }
 
 function excluirAviso(id) {
     requisitarAPI(`/avisos/${encodeURIComponent(id)}`, "DELETE")
-        .then(resposta => {buscarAvisos();})
+        .then(resposta => {buscarAvisos()})
         .catch(erro => {});
 }

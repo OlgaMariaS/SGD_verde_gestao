@@ -144,3 +144,33 @@ ALTER TABLE "info_usuario"
 
 ALTER TABLE "log"
     ADD CONSTRAINT "log_usuarioid_foreign" FOREIGN KEY ("usuarioid") REFERENCES "usuario" ("usuarioid");
+
+-- Adicionar sequences
+
+CREATE SEQUENCE usuario_usuarioid_seq START 1;
+CREATE SEQUENCE secao_secaoid_seq START 1;
+CREATE SEQUENCE tipo_usuario_tipousuarioid_seq START 1;
+CREATE SEQUENCE tipo_solicitacao_tiposolicitacaoid_seq START 1;
+CREATE SEQUENCE tipo_documento_tipodocumentoid_seq START 1;
+CREATE SEQUENCE solicitacao_solicitacaoid_seq START 1;
+CREATE SEQUENCE documento_documentoid_seq START 1;
+CREATE SEQUENCE documento_solicitacao_solicitacaoid_seq START 1;
+CREATE SEQUENCE endereco_usuario_enderecousuarioid_seq START 1;
+CREATE SEQUENCE comentario_comentarioid_seq START 1;
+CREATE SEQUENCE aviso_avisoid_seq START 1;
+CREATE SEQUENCE info_usuario_infousuarioid_seq START 1;
+CREATE SEQUENCE log_logid_seq START 1;
+
+ALTER TABLE "usuario" ALTER COLUMN "usuarioid" SET DEFAULT nextval('usuario_usuarioid_seq');
+ALTER TABLE "secao" ALTER COLUMN "secaoid" SET DEFAULT nextval('secao_secaoid_seq');
+ALTER TABLE "tipo_usuario" ALTER COLUMN "tipousuarioid" SET DEFAULT nextval('tipo_usuario_tipousuarioid_seq');
+ALTER TABLE "tipo_solicitacao" ALTER COLUMN "tiposolicitacaoid" SET DEFAULT nextval('tipo_solicitacao_tiposolicitacaoid_seq');
+ALTER TABLE "tipo_documento" ALTER COLUMN "tipodocumentoid" SET DEFAULT nextval('tipo_documento_tipodocumentoid_seq');
+ALTER TABLE "solicitacao" ALTER COLUMN "solicitacaoid" SET DEFAULT nextval('solicitacao_solicitacaoid_seq');
+ALTER TABLE "documento" ALTER COLUMN "documentoid" SET DEFAULT nextval('documento_documentoid_seq');
+ALTER TABLE "documento_solicitacao" ALTER COLUMN "solicitacaoid" SET DEFAULT nextval('documento_solicitacao_solicitacaoid_seq');
+ALTER TABLE "endereco_usuario" ALTER COLUMN "enderecousuarioid" SET DEFAULT nextval('endereco_usuario_enderecousuarioid_seq');
+ALTER TABLE "comentario" ALTER COLUMN "comentarioid" SET DEFAULT nextval('comentario_comentarioid_seq');
+ALTER TABLE "aviso" ALTER COLUMN "avisoid" SET DEFAULT nextval('aviso_avisoid_seq');
+ALTER TABLE "info_usuario" ALTER COLUMN "infousuarioid" SET DEFAULT nextval('info_usuario_infousuarioid_seq');
+ALTER TABLE "log" ALTER COLUMN "logid" SET DEFAULT nextval('log_logid_seq');

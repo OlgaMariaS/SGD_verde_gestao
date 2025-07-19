@@ -1,6 +1,6 @@
 package com.verde_gestao.api.controladores;
 
-import com.verde_gestao.api.objetos.dto.ResponseUsuarioLogado;
+import com.verde_gestao.api.objetos.dto.UsuarioLogadoDTO;
 import com.verde_gestao.api.objetos.modelo.Usuario;
 import com.verde_gestao.api.servicos.ServicoUsuario;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +39,7 @@ public class ControladorUsuario {
     }
 
     @GetMapping("/verificarLogin")
-    public ResponseUsuarioLogado verificarLogin(@RequestParam String nome, @RequestParam String senha) {
+    public ResponseEntity<UsuarioLogadoDTO> verificarLogin(@RequestParam String nome, @RequestParam String senha) {
         return servicoUsuario.verificarLogin(nome, senha);
     }
 

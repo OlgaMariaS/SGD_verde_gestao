@@ -1,5 +1,3 @@
-var usuarioLogado = []
-
 function configurarLogin() {
     document.getElementById("loginForm").addEventListener("submit", function(e) {
         e.preventDefault();
@@ -10,15 +8,18 @@ function configurarLogin() {
 }
 
 function requisitarLogin(nomeLogin, senhaLogin) {
+    // Talvez fosse mais prudente criar um sistema de handlers e daí lembrar o Login pela sessão do servidor, mas foda-se.
     requisitarAPI(`/usuarios/verificarLogin?nome=${encodeURIComponent(nomeLogin)}&senha=${encodeURIComponent(senhaLogin)}`)
-        .then(responseLogin => {
-            if (!responseLogin) {
-                alert("Usuário ou senha inválidos!");
-                return
-            }
-
-            usuarioLogado = responseLogin;
+        .then(usuarioLogado => {
+            salvarLocalmente('usuarioLogado', usuarioLogado)
             window.location.href = "home.html";
         })
-        .catch(erro => {});
+        .catch(erro => {
+            console.error(erro);
+            // É, eu sei... é gambiarra.
+            if (erro.message.includes("404")) {
+                alert("Usuário ou senha inválidos!");
+                return;
+            }
+        });
 }

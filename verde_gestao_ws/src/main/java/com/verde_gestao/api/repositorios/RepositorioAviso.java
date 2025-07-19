@@ -1,6 +1,6 @@
 package com.verde_gestao.api.repositorios;
 
-import com.verde_gestao.api.objetos.dto.ResponseCardAviso;
+import com.verde_gestao.api.objetos.dto.CardAvisoDTO;
 import com.verde_gestao.api.objetos.modelo.Aviso;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -24,13 +26,13 @@ public class RepositorioAviso {
         String sql = """
             SELECT 
                 avisoid, 
-                autorusuarioid, 
+                autor_usuarioid, 
                 titulo, 
                 texto, 
-                datainicio, 
-                datafim 
+                data_inicio, 
+                data_fim 
             FROM aviso 
-            ORDER BY datainicio DESC
+            ORDER BY data_inicio DESC
             """;
         return jdbcTemplate.query(sql, new AvisoRowMapper());
     }
@@ -39,11 +41,11 @@ public class RepositorioAviso {
         String sql = """
             SELECT 
                 avisoid, 
-                autorusuarioid, 
+                autor_usuarioid, 
                 titulo, 
                 texto, 
-                datainicio, 
-                datafim 
+                data_inicio, 
+                data_fim 
             FROM aviso 
             WHERE avisoid = ?
             """;
@@ -55,32 +57,43 @@ public class RepositorioAviso {
     }
 
     public int inserirAviso(Aviso aviso) {
-        String sql = """
+        SimpleDateFormat formatoBrasileiro = new SimpleDateFormat("dd/MM/yyyy");
+
+        try {
+            Date dataInicio = formatoBrasileiro.parse(aviso.getDataInicio());
+            Date dataFim = formatoBrasileiro.parse(aviso.getDataFim());
+
+            String sql = """
             INSERT INTO aviso (
-                autorusuarioid, 
+                autor_usuarioid, 
                 titulo, 
                 texto, 
-                datainicio, 
-                datafim
-            ) VALUES (?, ?, ?, ?)
-            """;
-        return jdbcTemplate.update(sql,
-                aviso.getAutorUsuarioId(),
-                aviso.getTitulo(),
-                aviso.getTexto(),
-                aviso.getDataInicio(),
-                aviso.getDataFim()
-        );
+                data_inicio, 
+                data_fim
+            ) VALUES (?, ?, ?, ?, ?)
+        """;
+
+            return jdbcTemplate.update(sql,
+                    aviso.getAutorUsuarioId(),
+                    aviso.getTitulo(),
+                    aviso.getTexto(),
+                    dataInicio,
+                    dataFim
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 
     public int atualizarAviso(Aviso aviso) {
         String sql = """
             UPDATE aviso 
-            SET autorusuarioid = ?, 
+            SET autor_usuarioid = ?, 
                 titulo = ?, 
                 texto = ?, 
-                datainicio = ?, 
-                datafim = ? 
+                data_inicio = ?, 
+                data_fim = ? 
             WHERE avisoid = ?
             """;
         return jdbcTemplate.update(sql,
@@ -101,14 +114,14 @@ public class RepositorioAviso {
         return jdbcTemplate.update(sql, avisoId);
     }
 
-    public List<ResponseCardAviso> buscarTodosCardsAvisos() {
+    public List<CardAvisoDTO> buscarTodosCardsAvisos() {
         String sql = """
         SELECT
             avisoid,
             nome,
             titulo,
             texto,
-            to_char(data_inicio, 'DD/MM/YYYY HH24:MI') as data_texto
+            to_char(data_inicio, 'DD/MM/YYYY') as data_texto
         FROM aviso
         JOIN usuario ON autor_usuarioid = usuarioid
         ORDER BY data_inicio DESC
@@ -121,25 +134,25 @@ public class RepositorioAviso {
         public Aviso mapRow(ResultSet rs, int rowNum) throws SQLException {
             Aviso aviso = new Aviso();
             aviso.setAvisoId(rs.getInt("avisoid"));
-            aviso.setAutorUsuarioId(rs.getInt("autorusuarioid"));
+            aviso.setAutorUsuarioId(rs.getInt("autor_usuarioid"));
             aviso.setTitulo(rs.getString("titulo"));
             aviso.setTexto(rs.getString("texto"));
-            aviso.setDataInicio(rs.getString("datainicio"));
-            aviso.setDataFim(rs.getString("datafim"));
+            aviso.setDataInicio(rs.getString("data_inicio"));
+            aviso.setDataFim(rs.getString("data_fim"));
             return aviso;
         }
     }
 
-    private static class ResponseCardAvisoRowMapper implements RowMapper<ResponseCardAviso> {
+    private static class ResponseCardAvisoRowMapper implements RowMapper<CardAvisoDTO> {
         @Override
-        public ResponseCardAviso mapRow(ResultSet rs, int rowNum) throws SQLException {
-            ResponseCardAviso responseCardAviso = new ResponseCardAviso();
-            responseCardAviso.setId(rs.getInt("avisoid"));
-            responseCardAviso.setUsuario(rs.getString("nome"));
-            responseCardAviso.setTitulo(rs.getString("titulo"));
-            responseCardAviso.setTexto(rs.getString("texto"));
-            responseCardAviso.setData(rs.getString("data_texto"));
-            return responseCardAviso;
+        public CardAvisoDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+            CardAvisoDTO cardAvisoDTO = new CardAvisoDTO();
+            cardAvisoDTO.setId(rs.getInt("avisoid"));
+            cardAvisoDTO.setUsuario(rs.getString("nome"));
+            cardAvisoDTO.setTitulo(rs.getString("titulo"));
+            cardAvisoDTO.setTexto(rs.getString("texto"));
+            cardAvisoDTO.setData(rs.getString("data_texto"));
+            return cardAvisoDTO;
         }
     }
 

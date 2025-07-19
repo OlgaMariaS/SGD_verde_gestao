@@ -1,6 +1,6 @@
 package com.verde_gestao.api.repositorios;
 
-import com.verde_gestao.api.objetos.dto.ResponseUsuarioLogado;
+import com.verde_gestao.api.objetos.dto.UsuarioLogadoDTO;
 import com.verde_gestao.api.objetos.modelo.Usuario;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class RepositorioUsuario {
@@ -154,7 +155,7 @@ public class RepositorioUsuario {
         return count != null && count > 0;
     }
 
-    public List<ResponseUsuarioLogado> buscarUsuarioLogado(nome, senha) {
+    public UsuarioLogadoDTO buscarUsuarioLogado(String nome, String senha) {
         String sql = """
             SELECT
                 u.usuarioid,
@@ -172,8 +173,14 @@ public class RepositorioUsuario {
             FROM USUARIO u
             JOIN tipo_usuario t ON t.tipousuarioid = u.tipousuarioid
             JOIN secao s ON s.secaoid = u.secaoid
+            WHERE u.nome = ? and u.senha = ?
             """;
-        return jdbcTemplate.query(sql, new ResponseUsuarioLogadoRowMapper());
+
+        return jdbcTemplate.query(sql,
+                new ResponseUsuarioLogadoRowMapper(),
+                nome,
+                senha
+            ).get(0);
     }
 
     private static class UsuarioRowMapper implements RowMapper<Usuario> {
@@ -190,10 +197,10 @@ public class RepositorioUsuario {
         }
     }
 
-    private static class ResponseUsuarioLogadoRowMapper implements RowMapper<ResponseUsuarioLogado> {
+    private static class ResponseUsuarioLogadoRowMapper implements RowMapper<UsuarioLogadoDTO> {
         @Override
-        public ResponseUsuarioLogado mapRow(ResultSet rs, int rowNum) throws SQLException {
-            ResponseUsuarioLogado responseUsuarioLogado = new ResponseUsuarioLogado();
+        public UsuarioLogadoDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+            UsuarioLogadoDTO responseUsuarioLogado = new UsuarioLogadoDTO();
             responseUsuarioLogado.setUsuarioId(rs.getInt("usuarioid"));
             responseUsuarioLogado.setAdministrador(rs.getBoolean("administrador"));
             responseUsuarioLogado.setNome(rs.getString("nome"));

@@ -3,7 +3,7 @@ package com.verde_gestao.api.objetos.dto;
 import lombok.Data;
 
 @Data
-public class ResponseUsuarioLogado {
+public class UsuarioLogadoDTO {
 
     private int usuarioId;
     private boolean administrador;

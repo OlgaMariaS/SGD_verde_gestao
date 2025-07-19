@@ -2,7 +2,7 @@ function htmlAvisos() {
     return `
         <div class="container mt-4">
             <h1>Cadastro de Avisos</h1>
-            <p>Os avisos cadastrados poderão ser lidos por todos que acessarem o sistema.</p>
+            <p>Os avisos cadastrados poderão ser lidos por todos que acessarem o sistema e aparecerão na aba "Início".</p>
             
             <!-- Formulário de aviso -->
             <div id="formulario-aviso" class="card mb-4">
@@ -26,17 +26,11 @@ function htmlAvisos() {
                     </form>
                 </div>
             </div>
-        
-            <!-- Lista de avisos -->
-            <div id="lista-avisos">
-                <!-- Vai ter aviso aqui dentro... -->
-            </div>
         </div>
     `;
 }
 
 function htmlCardAviso(aviso) {
-    // Todo: Fazer aqui ele verificar se o úsuario é ou um não um administrador pra ver o botão de excluir.
     return `
         <div class="card-body">
             <h5 class="card-title">${aviso.titulo} <small class="text-muted" style="font-size: 0.9em;"> - postado em: ${aviso.data}</small></h5>

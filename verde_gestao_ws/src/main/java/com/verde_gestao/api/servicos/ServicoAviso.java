@@ -1,6 +1,6 @@
 package com.verde_gestao.api.servicos;
 
-import com.verde_gestao.api.objetos.dto.ResponseCardAviso;
+import com.verde_gestao.api.objetos.dto.CardAvisoDTO;
 import com.verde_gestao.api.objetos.modelo.Aviso;
 import com.verde_gestao.api.repositorios.RepositorioAviso;
 import org.springframework.http.HttpStatus;
@@ -45,7 +45,7 @@ public class ServicoAviso {
         repositorioAviso.deletarAviso(avisoId);
     }
 
-    public List<ResponseCardAviso> buscarTodosCardsAvisos() {
+    public List<CardAvisoDTO> buscarTodosCardsAvisos() {
         return repositorioAviso.buscarTodosCardsAvisos();
     }
 

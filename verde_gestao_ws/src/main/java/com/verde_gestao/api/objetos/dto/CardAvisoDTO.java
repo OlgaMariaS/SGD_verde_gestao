@@ -3,7 +3,7 @@ package com.verde_gestao.api.objetos.dto;
 import lombok.Data;
 
 @Data
-public class ResponseCardAviso {
+public class CardAvisoDTO {
 
     private int id;
     private String titulo;

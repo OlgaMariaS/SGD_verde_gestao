@@ -8,10 +8,15 @@
 </head>
 <body>
 
-<script src="common/utils.js"></script>
+<!-- Conteúdo principal -->
+<div id="content" class="flex-grow-1 p-4">
+</div>
+
+<script src="templates/login/html-login.js"></script>
 <script src="templates/login/template-login.js"></script>
+<script src="common/utils.js"></script>
 <script>
-    atualizarConteudoHtml(htmlLogin(), configurarLogin)
+    atualizarConteudoHtml(htmlLogin, configurarLogin)
 </script>
 </body>
 </html>

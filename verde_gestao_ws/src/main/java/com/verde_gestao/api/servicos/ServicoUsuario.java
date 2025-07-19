@@ -1,11 +1,12 @@
 package com.verde_gestao.api.servicos;
 
-import com.verde_gestao.api.objetos.dto.ResponseUsuarioLogado;
+import com.verde_gestao.api.objetos.dto.UsuarioLogadoDTO;
 import com.verde_gestao.api.objetos.modelo.Usuario;
 import com.verde_gestao.api.repositorios.RepositorioUsuario;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
@@ -42,14 +43,15 @@ public class ServicoUsuario {
         return repositorioUsuario.usuarioExiste(nome);
     }
 
-    public ResponseUsuarioLogado verificarLogin(String nome, String senha) {
+    public ResponseEntity<UsuarioLogadoDTO> verificarLogin(String nome, String senha) {
         boolean loginSucedido = repositorioUsuario.verificarLogin(nome, senha);
 
         if (!loginSucedido) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Campo úsuario ou senhas estão errados.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
 
-        return repositorioUsuario.buscarUsuarioLogado(nome, senha);
+        UsuarioLogadoDTO usuarioLogado = repositorioUsuario.buscarUsuarioLogado(nome, senha);
+        return ResponseEntity.ok(usuarioLogado);
     }
 
     public void inserirUsuario(Usuario usuario) {
