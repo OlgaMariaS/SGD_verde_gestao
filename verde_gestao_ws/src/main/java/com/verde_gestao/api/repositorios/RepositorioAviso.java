@@ -56,7 +56,7 @@ public class RepositorioAviso {
         }
     }
 
-    public int inserirAviso(Aviso aviso) {
+    public void inserirAviso(Aviso aviso) {
         SimpleDateFormat formatoBrasileiro = new SimpleDateFormat("dd/MM/yyyy");
 
         try {
@@ -73,7 +73,7 @@ public class RepositorioAviso {
             ) VALUES (?, ?, ?, ?, ?)
         """;
 
-            return jdbcTemplate.update(sql,
+            jdbcTemplate.update(sql,
                     aviso.getAutorUsuarioId(),
                     aviso.getTitulo(),
                     aviso.getTexto(),
@@ -82,11 +82,10 @@ public class RepositorioAviso {
             );
         } catch (Exception e) {
             e.printStackTrace();
-            return 0;
         }
     }
 
-    public int atualizarAviso(Aviso aviso) {
+    public void atualizarAviso(Aviso aviso) {
         String sql = """
             UPDATE aviso 
             SET autor_usuarioid = ?, 
@@ -96,7 +95,7 @@ public class RepositorioAviso {
                 data_fim = ? 
             WHERE avisoid = ?
             """;
-        return jdbcTemplate.update(sql,
+        jdbcTemplate.update(sql,
                 aviso.getAutorUsuarioId(),
                 aviso.getTitulo(),
                 aviso.getTexto(),
@@ -106,12 +105,12 @@ public class RepositorioAviso {
         );
     }
 
-    public int deletarAviso(int avisoId) {
+    public void deletarAviso(int avisoId) {
         String sql = """
             DELETE FROM aviso 
             WHERE avisoid = ?
             """;
-        return jdbcTemplate.update(sql, avisoId);
+        jdbcTemplate.update(sql, avisoId);
     }
 
     public List<CardAvisoDTO> buscarTodosCardsAvisos() {
