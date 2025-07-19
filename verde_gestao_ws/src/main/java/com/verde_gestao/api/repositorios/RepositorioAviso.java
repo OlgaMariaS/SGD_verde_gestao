@@ -123,7 +123,7 @@ public class RepositorioAviso {
                 to_char(data_inicio, 'DD/MM/YYYY') as data_texto
             FROM aviso
             JOIN usuario ON autor_usuarioid = usuarioid
-            ORDER BY data_inicio DESC
+            ORDER BY avisoid
             """;
         return jdbcTemplate.query(sql, new ResponseCardAvisoRowMapper());
     }

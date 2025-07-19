@@ -38,3 +38,16 @@ function requisitarAPI(url, metodo = "GET", body = null) {
             throw erro;
         });
 }
+
+function verificarUsuarioLogado() {
+    const usuarioLogado = recuperarLocalmente('usuarioLogado');
+
+    if (usuarioLogado == null) {
+        window.location.href = "index.html";
+    }
+}
+
+function deslogarUsuario() {
+    salvarLocalmente('usuarioLogado', null)
+    verificarUsuarioLogado()
+}

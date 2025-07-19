@@ -22,6 +22,10 @@
             <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Consultar Solicitações')">Consultar Solicitações</button>
             <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Usuários')">Usuários</button>
             <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Seções')">Seções</button>
+
+            <div class="dropdown-divider"></div>
+
+            <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Sair')">Sair</button>
         </div>
     </div>
 
@@ -36,6 +40,14 @@
 <script src="templates/inicio/template-inicio.js"></script>
 <script src="templates/avisos/template-avisos.js"></script>
 <script>
+    document.addEventListener("load", function() {
+        verificarUsuarioLogado();
+    });
+
+    window.onload = function() {
+        verificarUsuarioLogado();
+    };
+
     function opcaoSelecionada(opcao) {
         switch (opcao) {
             case 'Início':
@@ -59,6 +71,10 @@
                 break;
 
             case 'Seções':
+                break;
+
+            case 'Sair':
+                deslogarUsuario();
                 break;
 
             default:

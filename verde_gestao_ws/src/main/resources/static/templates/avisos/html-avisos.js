@@ -32,11 +32,11 @@ function htmlAvisos() {
 
 function htmlCardAviso(aviso) {
     return `
-        <div class="card-body">
+        <div class="card-body" id="card-${aviso.id}">
             <h5 class="card-title">${aviso.titulo} <small class="text-muted" style="font-size: 0.9em;"> - postado em: ${aviso.data}</small></h5>
             <p class="card-text">${aviso.texto}</p>
             <p class="card-text"><small class="text-muted">Assinado por: ${aviso.usuario}</small></p>
-            <button class="btn btn-danger btn-sm" onclick="excluirAviso(${aviso.id})">Excluir</button>
+            <button id="botao-excluir-${aviso.id}" class="btn btn-danger btn-sm" onclick="excluirAviso(${aviso.id})">Excluir</button>
         </div>
-    `
+    `;
 }

@@ -32,9 +32,21 @@ function instanciarCardAvisos() {
         const cardAviso = document.createElement("div");
         cardAviso.className = "card mb-3";
         cardAviso.innerHTML = htmlCardAviso(aviso);
-
         containerAvisos.appendChild(cardAviso);
+        configurarBotaoExcluir(aviso)
     });
+}
+
+function configurarBotaoExcluir(aviso) {
+    const botaoExcluir = document.getElementById(`botao-excluir-${aviso.id}`);
+    const usuarioLogado = recuperarLocalmente('usuarioLogado');
+    const administrador = usuarioLogado.administrador;
+
+    if (!administrador) {
+        botaoExcluir.style.visibility = "hidden";
+    } else {
+        botaoExcluir.style.visibility = "visible";
+    }
 }
 
 function buscarAvisos() {
