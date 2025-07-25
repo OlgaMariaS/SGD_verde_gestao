@@ -15,7 +15,7 @@ public class DatabaseMigrationRunner implements ApplicationRunner {
 
     private final JdbcTemplate jdbcTemplate;
 
-    @Value("classpath:db/migration/drawSQL-pgsql-export-2025-07-07.sql")
+    @Value("classpath:db/migration/postgres_migration.sql")
     private Resource migrationScript;
 
     public DatabaseMigrationRunner(JdbcTemplate jdbcTemplate) {

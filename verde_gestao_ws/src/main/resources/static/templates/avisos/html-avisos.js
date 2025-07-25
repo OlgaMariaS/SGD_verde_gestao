@@ -19,7 +19,7 @@ function htmlAvisos() {
                         
                         <div class="form-group">
                             <label for="campo-mensagem">Mensagem</label>
-                            <textarea class="form-control" id="campo-mensagem" rows="3" placeholder="Digite o aviso..." required></textarea>
+                            <textarea class="form-control" id="campo-mensagem" rows="3" placeholder="Digite o aviso" required></textarea>
                         </div>
                         
                         <button type="submit" class="btn btn-primary">Adicionar Aviso</button>

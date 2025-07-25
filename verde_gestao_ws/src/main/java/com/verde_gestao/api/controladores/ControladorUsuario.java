@@ -1,5 +1,6 @@
 package com.verde_gestao.api.controladores;
 
+import com.verde_gestao.api.objetos.dto.MensagemSimplesDTO;
 import com.verde_gestao.api.objetos.dto.UsuarioLogadoDTO;
 import com.verde_gestao.api.objetos.modelo.Usuario;
 import com.verde_gestao.api.servicos.ServicoUsuario;
@@ -44,21 +45,21 @@ public class ControladorUsuario {
     }
 
     @PostMapping
-    public ResponseEntity<String> inserirUsuario(@RequestBody Usuario usuario) {
+    public ResponseEntity<MensagemSimplesDTO> inserirUsuario(@RequestBody Usuario usuario) {
         servicoUsuario.inserirUsuario(usuario);
-        return ResponseEntity.ok("Usuário inserido com sucesso!");
+        return ResponseEntity.ok(new MensagemSimplesDTO("Usuário inserido com sucesso!"));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> atualizarUsuario(@PathVariable("id") int id, @RequestBody Usuario usuario) {
+    public ResponseEntity<MensagemSimplesDTO> atualizarUsuario(@PathVariable("id") int id, @RequestBody Usuario usuario) {
         servicoUsuario.atualizarUsuario(id, usuario);
-        return ResponseEntity.ok("Usuário atualizado com sucesso!");
+        return ResponseEntity.ok(new MensagemSimplesDTO("Usuário atualizado com sucesso!"));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletarUsuario(@PathVariable("id") int id) {
+    public ResponseEntity<MensagemSimplesDTO> deletarUsuario(@PathVariable("id") int id) {
         servicoUsuario.deletarUsuario(id);
-        return ResponseEntity.ok("Usuário deletado com sucesso!");
+        return ResponseEntity.ok(new MensagemSimplesDTO("Usuário deletado com sucesso!"));
     }
 
     @GetMapping("/existeAdmin")

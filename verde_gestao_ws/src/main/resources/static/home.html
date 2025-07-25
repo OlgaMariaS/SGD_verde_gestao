@@ -18,7 +18,6 @@
 
             <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Avisos')">Avisos</button>
             <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Categoria de Documentos')">Categoria de Documentos</button>
-            <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Configurações')">Configurações</button>
             <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Consultar Solicitações')">Consultar Solicitações</button>
             <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Usuários')">Usuários</button>
             <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Seções')">Seções</button>
@@ -34,11 +33,25 @@
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+
 <script src="common/utils.js"></script>
+
 <script src="templates/inicio/html-inicio.js"></script>
 <script src="templates/avisos/html-avisos.js"></script>
+<script src="templates/cadastro-tipo-documento/html-cadastro-tipo-documento.js"></script>
+<script src="templates/cadastro-usuario/html-cadastro-usuario.js"></script>
+<script src="templates/cadastro-usuario/html-tabela-usuario.js"></script>
+<script src="templates/cadastro-secao/html-cadastro-secao.js"></script>
+
 <script src="templates/inicio/template-inicio.js"></script>
 <script src="templates/avisos/template-avisos.js"></script>
+<script src="templates/cadastro-tipo-documento/template-cadastro-tipo-documento.js"></script>
+<script src="templates/cadastro-usuario/template-cadastro-usuario.js"></script>
+<script src="templates/cadastro-usuario/template-tabela-usuario.js"></script>
+<script src="templates/cadastro-secao/template-cadastro-secao.js"></script>
+
 <script>
     document.addEventListener("load", function() {
         verificarUsuarioLogado();
@@ -47,6 +60,8 @@
     window.onload = function() {
         verificarUsuarioLogado();
     };
+
+    atualizarConteudoHtml(htmlInicio, configurarInicio);
 
     function opcaoSelecionada(opcao) {
         switch (opcao) {
@@ -59,18 +74,18 @@
                 break;
 
             case 'Categoria de Documentos':
-                break;
-
-            case 'Configurações':
+                atualizarConteudoHtml(htmlCadastroTipoDocumento, configurarCadastroTipoDocumento);
                 break;
 
             case 'Consultar Solicitações':
                 break;
 
             case 'Usuários':
+                atualizarConteudoHtml(htmlTabelaUsuario, configurarTabelaUsuarios);
                 break;
 
             case 'Seções':
+                atualizarConteudoHtml(htmlCadastroSecao, configurarCadastroSecao);
                 break;
 
             case 'Sair':
