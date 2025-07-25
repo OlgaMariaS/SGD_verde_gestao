@@ -1,16 +1,41 @@
 package com.verde_gestao.api.objetos.modelo;
 
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.*;
 
-@Data
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "solicitacao")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Solicitacao {
 
-    private int solicitacaoId;
-    private int tipoSolicitacaoId;
-    private int criadorUsuarioId;
-    private int responsavelUsuarioId;
-    private String dataCriacao;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "solicitacao_seq")
+    @SequenceGenerator(name = "solicitacao_seq", sequenceName = "solicitacao_solicitacaoid_seq", allocationSize = 1)
+    @EqualsAndHashCode.Include
+    private Long solicitacaoid;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "tiposolicitacaoid")
+    private TipoSolicitacao tipoSolicitacao;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "criador_usuarioid")
+    private Usuario criador;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "responsavel_usuarioid")
+    private Usuario responsavel;
+
+    private LocalDate dataCriacao;
+
     private String status;
+
     private String descricao;
 
 }

@@ -30,11 +30,18 @@ function requisitarAPI(url, metodo = "GET", body = null) {
                     throw new Error(`Erro: ${resposta.status} - ${text}`);
                 });
             }
-            return resposta.json();
+
+            // Evita tentar parsear JSON vazio...
+            const contentType = resposta.headers.get("content-type");
+            if (contentType && contentType.includes("application/json")) {
+                return resposta.json();
+            } else {
+                return null; // ou apenas undefined...
+            }
         })
         .catch(erro => {
             console.error('Erro na requisição:', erro);
-            alert(erro.message); // Todo: remover ao finalizar o sistema.
+            alert(erro.message); // TODO: remover ao finalizar o sistema.
             throw erro;
         });
 }

@@ -1,7 +1,8 @@
 package com.verde_gestao.api.controladores;
 
 import com.verde_gestao.api.objetos.modelo.Comentario;
-import com.verde_gestao.api.repositorios.RepositorioComentario;
+import com.verde_gestao.api.servicos.ServicoComentario;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,39 +11,30 @@ import java.util.List;
 @RequestMapping("/comentarios")
 public class ControladorComentario {
 
-    private final RepositorioComentario repositorioComentario;
+    private final ServicoComentario servicoComentario;
 
-    public ControladorComentario(RepositorioComentario repositorioComentario) {
-        this.repositorioComentario = repositorioComentario;
+    public ControladorComentario(ServicoComentario servicoComentario) {
+        this.servicoComentario = servicoComentario;
     }
 
-    @GetMapping("/solicitacao/{solicitacaoId}")
-    public List<Comentario> buscarComentariosPorSolicitacao(@PathVariable("solicitacaoId") int solicitacaoId) {
-        return repositorioComentario.buscarComentariosPorSolicitacao(solicitacaoId);
+    @GetMapping
+    public List<Comentario> buscarTodos() {
+        return servicoComentario.buscarTodos();
     }
 
     @GetMapping("/{id}")
-    public Comentario buscarComentarioPorId(@PathVariable("id") int comentarioId) {
-        return repositorioComentario.buscarComentarioPorId(comentarioId);
+    public ResponseEntity<Comentario> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.of(servicoComentario.buscarPorId(id));
     }
 
     @PostMapping
-    public String inserirComentario(@RequestBody Comentario comentario) {
-        int result = repositorioComentario.inserirComentario(comentario);
-        return result > 0 ? "Comentário inserido com sucesso!" : "Erro ao inserir comentário.";
-    }
-
-    @PutMapping("/{id}")
-    public String atualizarComentario(@PathVariable("id") int comentarioId, @RequestBody Comentario comentario) {
-        comentario.setComentarioId(comentarioId);
-        int result = repositorioComentario.atualizarComentario(comentario);
-        return result > 0 ? "Comentário atualizado com sucesso!" : "Erro ao atualizar comentário.";
+    public ResponseEntity<Comentario> salvar(@RequestBody Comentario objeto) {
+        return ResponseEntity.ok(servicoComentario.salvar(objeto));
     }
 
     @DeleteMapping("/{id}")
-    public String deletarComentario(@PathVariable("id") int comentarioId) {
-        int result = repositorioComentario.deletarComentario(comentarioId);
-        return result > 0 ? "Comentário deletado com sucesso!" : "Erro ao deletar comentário.";
+    public ResponseEntity<Void> excluirPorId(@PathVariable Long id) {
+        servicoComentario.excluirPorId(id);
+        return ResponseEntity.noContent().build();
     }
-
 }

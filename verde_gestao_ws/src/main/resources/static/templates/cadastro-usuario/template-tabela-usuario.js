@@ -16,11 +16,11 @@ function configurarTabelaUsuarios() {
                 tr.innerHTML = `
                     <td>${usuario.nome}</td>
                     <td>${usuario.administrador ? "Sim" : "Não"}</td>
-                    <td>${usuario.tipoUsuarioId}</td>
-                    <td>${usuario.secaoId}</td>
+                    <td>${usuario.tipoUsuario?.descricao || "-"}</td>
+                    <td>${usuario.secao?.descricao || "-"}</td>
                     <td>
-                        <button class="btn btn-sm btn-primary editar" data-id="${usuario.usuarioId}">Editar</button>
-                        <button class="btn btn-sm btn-danger excluir" data-id="${usuario.usuarioId}">Excluir</button>
+                        <button class="btn btn-sm btn-primary editar" data-id="${usuario.usuarioid}">Editar</button>
+                        <button class="btn btn-sm btn-danger excluir" data-id="${usuario.usuarioid}">Excluir</button>
                     </td>
                 `;
 

@@ -1,7 +1,6 @@
 package com.verde_gestao.api.controladores;
 
 import com.verde_gestao.api.objetos.dto.CardAvisoDTO;
-import com.verde_gestao.api.objetos.dto.MensagemSimplesDTO;
 import com.verde_gestao.api.objetos.modelo.Aviso;
 import com.verde_gestao.api.servicos.ServicoAviso;
 import org.springframework.http.ResponseEntity;
@@ -20,35 +19,28 @@ public class ControladorAviso {
     }
 
     @GetMapping
-    public List<Aviso> buscarTodosAvisos() {
-        return servicoAviso.buscarTodosAvisos();
+    public List<Aviso> buscarTodos() {
+        return servicoAviso.buscarTodos();
     }
 
     @GetMapping("/{id}")
-    public Aviso buscarAvisoPorId(@PathVariable("id") int avisoId) {
-        return servicoAviso.buscarAvisoPorId(avisoId);
+    public ResponseEntity<Aviso> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.of(servicoAviso.buscarPorId(id));
     }
 
     @PostMapping
-    public ResponseEntity<MensagemSimplesDTO> inserirAviso(@RequestBody Aviso aviso) {
-        servicoAviso.inserirAviso(aviso);
-        return ResponseEntity.ok(new MensagemSimplesDTO("Aviso inserido com sucesso!"));
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<MensagemSimplesDTO> atualizarAviso(@PathVariable("id") int avisoId, @RequestBody Aviso aviso) {
-        servicoAviso.atualizarAviso(avisoId, aviso);
-        return ResponseEntity.ok(new MensagemSimplesDTO("Aviso atualizado com sucesso!"));
+    public ResponseEntity<Aviso> salvar(@RequestBody Aviso aviso) {
+        return ResponseEntity.ok(servicoAviso.salvar(aviso));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<MensagemSimplesDTO> deletarAviso(@PathVariable("id") int avisoId) {
-        servicoAviso.deletarAviso(avisoId);
-        return ResponseEntity.ok(new MensagemSimplesDTO("Aviso deletado com sucesso!"));
+    public ResponseEntity<Void> excluirPorId(@PathVariable Long id) {
+        servicoAviso.excluirPorId(id);
+        return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/buscarTodosCardsAvisos")
-    public ResponseEntity<List<CardAvisoDTO>> buscarTodosCardsAvisos() {
+    @GetMapping("/cards")
+    public List<CardAvisoDTO> buscarTodosCardsAvisos() {
         return servicoAviso.buscarTodosCardsAvisos();
     }
 

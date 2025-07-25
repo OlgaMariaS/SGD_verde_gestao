@@ -20,19 +20,11 @@ function htmlCadastroUsuario() {
                 </div>
                 <div class="form-group">
                     <label for="tipousuarioid">Tipo de Usuário</label>
-                    <select id="tipousuarioid" class="form-control">
-                        <option value="1">Chefe de Sessão</option>
-                        <option value="2">Chefe Assistente</option>
-                        <option value="3">Diretor</option>
-                    </select>
+                    <select id="tipousuarioid" class="form-control"></select>
                 </div>
                 <div class="form-group">
                     <label for="secaoid">Seção</label>
-                    <select id="secaoid" class="form-control">
-                        <option value="1">Seção X</option>
-                        <option value="2">Seção Y</option>
-                        <option value="3">Seção Z</option>
-                    </select>
+                    <select id="secaoid" class="form-control"></select>
                 </div>
                 <button class="btn btn-primary" type="submit">Salvar</button>
             </form>

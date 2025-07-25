@@ -1,6 +1,5 @@
 package com.verde_gestao.api.controladores;
 
-import com.verde_gestao.api.objetos.dto.MensagemSimplesDTO;
 import com.verde_gestao.api.objetos.dto.UsuarioLogadoDTO;
 import com.verde_gestao.api.objetos.modelo.Usuario;
 import com.verde_gestao.api.servicos.ServicoUsuario;
@@ -29,42 +28,25 @@ public class ControladorUsuario {
         return servicoUsuario.verificarLogin(nome, senha);
     }
 
-    @GetMapping("/{id}")
-    public Usuario buscarUsuarioPorId(@PathVariable("id") int id) {
-        return servicoUsuario.buscarUsuarioPorId(id);
-    }
-
-    @GetMapping("/buscarPorNome")
-    public Usuario buscarUsuarioPorNome(@RequestParam String nome) {
-        return servicoUsuario.buscarUsuarioPorNome(nome);
-    }
-
-    @GetMapping("/existe")
-    public boolean usuarioExiste(@RequestParam String nome) {
-        return servicoUsuario.usuarioExiste(nome);
-    }
-
     @PostMapping
-    public ResponseEntity<MensagemSimplesDTO> inserirUsuario(@RequestBody Usuario usuario) {
-        servicoUsuario.inserirUsuario(usuario);
-        return ResponseEntity.ok(new MensagemSimplesDTO("Usuário inserido com sucesso!"));
+    public ResponseEntity<Usuario> criar(@RequestBody Usuario usuario) {
+        return ResponseEntity.ok(servicoUsuario.criar(usuario));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MensagemSimplesDTO> atualizarUsuario(@PathVariable("id") int id, @RequestBody Usuario usuario) {
-        servicoUsuario.atualizarUsuario(id, usuario);
-        return ResponseEntity.ok(new MensagemSimplesDTO("Usuário atualizado com sucesso!"));
+    public ResponseEntity<Usuario> atualizar(@PathVariable Long id, @RequestBody Usuario usuario) {
+        return ResponseEntity.ok(servicoUsuario.atualizar(id, usuario));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<MensagemSimplesDTO> deletarUsuario(@PathVariable("id") int id) {
-        servicoUsuario.deletarUsuario(id);
-        return ResponseEntity.ok(new MensagemSimplesDTO("Usuário deletado com sucesso!"));
+    public ResponseEntity<Void> excluirPorId(@PathVariable Long id) {
+        servicoUsuario.excluirPorId(id);
+        return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/existeAdmin")
-    public boolean existeAdministrador() {
-        return servicoUsuario.existeAdministrador();
+    @GetMapping("/{id}")
+    public ResponseEntity<Usuario> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.of(servicoUsuario.buscarPorId(id));
     }
 
 }

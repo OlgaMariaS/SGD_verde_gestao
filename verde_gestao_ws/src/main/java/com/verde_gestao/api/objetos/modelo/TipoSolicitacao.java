@@ -4,20 +4,19 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "secao")
+@Table(name = "tipo_solicitacao")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Secao {
+@ToString
+public class TipoSolicitacao {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "secao_seq")
-    @SequenceGenerator(name = "secao_seq", sequenceName = "secao_secaoid_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private Long secaoid;
+    private Long tiposolicitacaoid;
 
     private String descricao;
-
 }

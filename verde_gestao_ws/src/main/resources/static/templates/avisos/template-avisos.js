@@ -6,20 +6,21 @@ function configurarAvisos() {
 
         const tituloAviso = document.getElementById("campo-titulo").value;
         const mensagem = document.getElementById("campo-mensagem").value;
-        const dataHora = new Date().toLocaleString("pt-BR");
         const usuarioLogado = recuperarLocalmente('usuarioLogado');
 
+        // Converte para ISO "yyyy-MM-dd"
+        const hoje = new Date();
+        const dataISO = hoje.toISOString().slice(0, 10);
+
         const aviso = {
-            avisoId: 0,
-            autorUsuarioId: usuarioLogado.usuarioId,
+            autor: { usuarioid: usuarioLogado.usuarioid },
             titulo: tituloAviso,
             texto: mensagem,
-            dataInicio: dataHora,
-            dataFim: dataHora,
-        }
+            dataInicio: dataISO,
+            dataFim: dataISO
+        };
 
-        inserirAviso(aviso)
-
+        inserirAviso(aviso);
         document.getElementById("form-aviso").reset();
     });
 }
@@ -50,7 +51,7 @@ function configurarBotaoExcluir(aviso) {
 }
 
 function buscarAvisos() {
-    requisitarAPI(`/avisos/buscarTodosCardsAvisos`)
+    requisitarAPI(`/avisos/cards`)
         .then(listaCardAviso => {
             listaAvisos = [];
 

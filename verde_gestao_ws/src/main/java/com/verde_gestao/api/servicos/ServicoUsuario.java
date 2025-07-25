@@ -3,12 +3,12 @@ package com.verde_gestao.api.servicos;
 import com.verde_gestao.api.objetos.dto.UsuarioLogadoDTO;
 import com.verde_gestao.api.objetos.modelo.Usuario;
 import com.verde_gestao.api.repositorios.RepositorioUsuario;
-import org.springframework.http.HttpStatus;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ServicoUsuario {
@@ -20,67 +20,50 @@ public class ServicoUsuario {
     }
 
     public List<Usuario> buscarTodosUsuarios() {
-        return repositorioUsuario.buscarTodosUsuarios();
+        return repositorioUsuario.findAll();
     }
 
-    public Usuario buscarUsuarioPorId(int usuarioId) {
-        Usuario usuario = repositorioUsuario.buscarUsuarioPorId(usuarioId);
-        if (usuario == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado");
-        }
-        return usuario;
+    public Optional<Usuario> buscarPorId(Long id) {
+        return repositorioUsuario.findById(id);
     }
 
-    public Usuario buscarUsuarioPorNome(String nome) {
-        Usuario usuario = repositorioUsuario.buscarUsuarioPorNome(nome);
-        if (usuario == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado");
-        }
-        return usuario;
+    public Usuario criar(Usuario usuario) {
+        usuario.setUsuarioid(null);
+        return repositorioUsuario.save(usuario);
     }
 
-    public boolean usuarioExiste(String nome) {
-        return repositorioUsuario.usuarioExiste(nome);
+    public Usuario atualizar(Long id, Usuario usuarioAtualizado) {
+        Usuario existente = repositorioUsuario.findById(id).orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado com ID: " + id));
+
+        existente.setNome(usuarioAtualizado.getNome());
+        existente.setSenha(usuarioAtualizado.getSenha());
+        existente.setAdministrador(usuarioAtualizado.isAdministrador());
+        existente.setSecao(usuarioAtualizado.getSecao());
+        existente.setTipoUsuario(usuarioAtualizado.getTipoUsuario());
+
+        return repositorioUsuario.save(existente);
+    }
+
+    public void excluirPorId(Long id) {
+        repositorioUsuario.deleteById(id);
     }
 
     public ResponseEntity<UsuarioLogadoDTO> verificarLogin(String nome, String senha) {
-        boolean loginSucedido = repositorioUsuario.verificarLogin(nome, senha);
+        Optional<Usuario> usuarioOpt = repositorioUsuario.findByNomeAndSenha(nome, senha);
 
-        if (!loginSucedido) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        if (usuarioOpt.isPresent()) {
+            Usuario usuario = usuarioOpt.get();
+            UsuarioLogadoDTO dto = new UsuarioLogadoDTO(
+                    usuario.getUsuarioid(),
+                    usuario.isAdministrador(),
+                    usuario.getNome(),
+                    usuario.getTipoUsuario().getDescricao(),
+                    usuario.getSecao().getDescricao()
+            );
+            return ResponseEntity.ok(dto);
+        } else {
+            return ResponseEntity.notFound().build();
         }
-
-        UsuarioLogadoDTO usuarioLogado = repositorioUsuario.buscarUsuarioLogado(nome, senha);
-        return ResponseEntity.ok(usuarioLogado);
-    }
-
-    public void inserirUsuario(Usuario usuario) {
-        if (usuarioExiste(usuario.getNome())) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Usuário já existe");
-        }
-        int res = repositorioUsuario.inserirUsuario(usuario);
-        if (res <= 0) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao inserir usuário");
-        }
-    }
-
-    public void atualizarUsuario(int usuarioId, Usuario usuario) {
-        usuario.setUsuarioId(usuarioId);
-        int res = repositorioUsuario.atualizarUsuario(usuario);
-        if (res <= 0) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Erro ao atualizar usuário ou usuário não encontrado");
-        }
-    }
-
-    public void deletarUsuario(int usuarioId) {
-        int res = repositorioUsuario.deletarUsuario(usuarioId);
-        if (res <= 0) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Erro ao deletar usuário ou usuário não encontrado");
-        }
-    }
-
-    public boolean existeAdministrador() {
-        return repositorioUsuario.existeAdministrador();
     }
 
 }

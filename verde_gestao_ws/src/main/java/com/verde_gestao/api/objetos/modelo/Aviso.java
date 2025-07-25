@@ -1,15 +1,35 @@
 package com.verde_gestao.api.objetos.modelo;
 
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.*;
 
-@Data
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "aviso")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Aviso {
 
-    private int avisoId;
-    private int autorUsuarioId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "aviso_seq")
+    @SequenceGenerator(name = "aviso_seq", sequenceName = "aviso_avisoid_seq", allocationSize = 1)
+    @EqualsAndHashCode.Include
+    private Long avisoid;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "autor_usuarioid")
+    private Usuario autor;
+
     private String titulo;
+
     private String texto;
-    private String dataInicio;
-    private String dataFim;
+
+    private LocalDate dataInicio;
+
+    private LocalDate dataFim;
 
 }

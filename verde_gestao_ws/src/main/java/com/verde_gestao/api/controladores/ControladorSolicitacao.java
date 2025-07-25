@@ -1,58 +1,40 @@
 package com.verde_gestao.api.controladores;
 
 import com.verde_gestao.api.objetos.modelo.Solicitacao;
-import com.verde_gestao.api.repositorios.RepositorioSolicitacao;
+import com.verde_gestao.api.servicos.ServicoSolicitacao;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/solicitacoes")
+@RequestMapping("/solicitacaos")
 public class ControladorSolicitacao {
 
-    private final RepositorioSolicitacao repositorioSolicitacao;
+    private final ServicoSolicitacao servicoSolicitacao;
 
-    public ControladorSolicitacao(RepositorioSolicitacao repositorioSolicitacao) {
-        this.repositorioSolicitacao = repositorioSolicitacao;
+    public ControladorSolicitacao(ServicoSolicitacao servicoSolicitacao) {
+        this.servicoSolicitacao = servicoSolicitacao;
     }
 
     @GetMapping
-    public List<Solicitacao> buscarTodasSolicitacoes() {
-        return repositorioSolicitacao.buscarTodasSolicitacoes();
+    public List<Solicitacao> buscarTodos() {
+        return servicoSolicitacao.buscarTodos();
     }
 
     @GetMapping("/{id}")
-    public Solicitacao buscarSolicitacaoPorId(@PathVariable("id") int solicitacaoId) {
-        return repositorioSolicitacao.buscarSolicitacaoPorId(solicitacaoId);
-    }
-
-    @GetMapping("/criador/{criadorId}")
-    public List<Solicitacao> buscarSolicitacoesPorCriador(@PathVariable("criadorId") int criadorUsuarioId) {
-        return repositorioSolicitacao.buscarSolicitacoesPorCriador(criadorUsuarioId);
-    }
-
-    @GetMapping("/responsavel/{responsavelId}")
-    public List<Solicitacao> buscarSolicitacoesPorResponsavel(@PathVariable("responsavelId") int responsavelUsuarioId) {
-        return repositorioSolicitacao.buscarSolicitacoesPorResponsavel(responsavelUsuarioId);
+    public ResponseEntity<Solicitacao> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.of(servicoSolicitacao.buscarPorId(id));
     }
 
     @PostMapping
-    public String inserirSolicitacao(@RequestBody Solicitacao solicitacao) {
-        int result = repositorioSolicitacao.inserirSolicitacao(solicitacao);
-        return result > 0 ? "Solicitação inserida com sucesso!" : "Erro ao inserir solicitação.";
-    }
-
-    @PutMapping("/{id}")
-    public String atualizarSolicitacao(@PathVariable("id") int solicitacaoId, @RequestBody Solicitacao solicitacao) {
-        solicitacao.setSolicitacaoId(solicitacaoId);
-        int result = repositorioSolicitacao.atualizarSolicitacao(solicitacao);
-        return result > 0 ? "Solicitação atualizada com sucesso!" : "Erro ao atualizar solicitação.";
+    public ResponseEntity<Solicitacao> salvar(@RequestBody Solicitacao objeto) {
+        return ResponseEntity.ok(servicoSolicitacao.salvar(objeto));
     }
 
     @DeleteMapping("/{id}")
-    public String deletarSolicitacao(@PathVariable("id") int solicitacaoId) {
-        int result = repositorioSolicitacao.deletarSolicitacao(solicitacaoId);
-        return result > 0 ? "Solicitação deletada com sucesso!" : "Erro ao deletar solicitação.";
+    public ResponseEntity<Void> excluirPorId(@PathVariable Long id) {
+        servicoSolicitacao.excluirPorId(id);
+        return ResponseEntity.noContent().build();
     }
-
 }
