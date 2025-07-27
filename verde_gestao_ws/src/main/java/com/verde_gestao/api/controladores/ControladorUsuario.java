@@ -18,14 +18,14 @@ public class ControladorUsuario {
         this.servicoUsuario = servicoUsuario;
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Usuario> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.of(servicoUsuario.buscarPorId(id));
+    }
+
     @GetMapping
     public List<Usuario> buscarTodosUsuarios() {
         return servicoUsuario.buscarTodosUsuarios();
-    }
-
-    @GetMapping("/verificarLogin")
-    public ResponseEntity<UsuarioLogadoDTO> verificarLogin(@RequestParam String nome, @RequestParam String senha) {
-        return servicoUsuario.verificarLogin(nome, senha);
     }
 
     @PostMapping
@@ -44,9 +44,14 @@ public class ControladorUsuario {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Usuario> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.of(servicoUsuario.buscarPorId(id));
+    @GetMapping("/verificarLogin")
+    public ResponseEntity<UsuarioLogadoDTO> verificarLogin(@RequestParam String nome, @RequestParam String senha) {
+        return servicoUsuario.verificarLogin(nome, senha);
+    }
+
+    @GetMapping("/quemPossoEnviar/{usuarioId}/{tipoUsuarioDescricao}")
+    public List<Usuario> buscarTodosQuemPossoEnviar(@PathVariable Long usuarioId, @PathVariable String tipoUsuarioDescricao) {
+        return servicoUsuario.buscarTodosQuemPossoEnviar(usuarioId, tipoUsuarioDescricao);
     }
 
 }

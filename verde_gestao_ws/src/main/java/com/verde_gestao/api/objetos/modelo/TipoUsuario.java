@@ -15,8 +15,10 @@ public class TipoUsuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "tipousuario_seq", sequenceName = "tipo_usuario_tipousuarioid_seq", allocationSize = 1)
     @EqualsAndHashCode.Include
     private Long tipousuarioid;
 
     private String descricao;
+
 }

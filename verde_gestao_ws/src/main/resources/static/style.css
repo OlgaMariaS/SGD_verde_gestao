@@ -1,3 +1,5 @@
+/* Básico */
+
 body {
     background-color: #f8f9fa;
 }
@@ -13,4 +15,85 @@ body {
 
 .login-title {
     margin-bottom: 20px;
+}
+
+/* Efeitos de fade-in e fade-out (se for alterar o tempo tem que mudar no código também) */
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 300ms ease-out;
+}
+
+.fade-in {
+    opacity: 1;
+    transition: opacity 300ms ease-in;
+}
+
+.invisible {
+    opacity: 0;
+}
+
+/* Remove estilos padrões da tabela do Bootstrap */
+.table {
+    background-color: transparent;
+    border-collapse: separate !important;
+    border-spacing: 0;
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+}
+
+/* Container com sombra e arredondamento */
+.table-container {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    background: white;
+    margin-top: 1rem;
+}
+
+/* Cabeçalho moderno */
+.table thead {
+    background-color: #009879;
+    color: white;
+    font-weight: bold;
+}
+
+.table thead th {
+    padding: 14px 20px;
+    border: none;
+    font-size: 16px;
+}
+
+/* Linhas e colunas */
+.table td {
+    padding: 12px 20px;
+    vertical-align: middle;
+    border-top: none;
+    border-bottom: 1px solid #eaeaea;
+    font-size: 15px;
+}
+
+/* Zebra striping */
+.table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Hover */
+.table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Linha ativa */
+.table tbody tr.table-active {
+    background-color: #e0f7f4 !important;
+    color: #00745f;
+}
+
+/* Borda arredondada no topo */
+.table thead th:first-child {
+    border-top-left-radius: 12px;
+}
+.table thead th:last-child {
+    border-top-right-radius: 12px;
 }

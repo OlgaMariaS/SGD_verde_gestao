@@ -2,6 +2,7 @@ package com.verde_gestao.api.servicos;
 
 import com.verde_gestao.api.objetos.modelo.Secao;
 import com.verde_gestao.api.repositorios.RepositorioSecao;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,8 +25,17 @@ public class ServicoSecao {
         return repositorioSecao.findById(id);
     }
 
-    public Secao salvar(Secao objeto) {
-        return repositorioSecao.save(objeto);
+    public Secao criar(Secao secao) {
+        secao.setSecaoid(null);
+        return repositorioSecao.save(secao);
+    }
+
+    public Secao atualizar(Long id, Secao secaoAtualizada) {
+        Secao existente = repositorioSecao.findById(id).orElseThrow(() -> new EntityNotFoundException("Seção não encontrada com ID: " + id));
+
+        existente.setDescricao(secaoAtualizada.getDescricao());
+
+        return repositorioSecao.save(existente);
     }
 
     public void excluirPorId(Long id) {

@@ -40,8 +40,8 @@ public class ControladorAviso {
     }
 
     @GetMapping("/cards")
-    public List<CardAvisoDTO> buscarTodosCardsAvisos() {
-        return servicoAviso.buscarTodosCardsAvisos();
+    public List<CardAvisoDTO> buscarCards() {
+        return servicoAviso.buscarCards();
     }
 
 }

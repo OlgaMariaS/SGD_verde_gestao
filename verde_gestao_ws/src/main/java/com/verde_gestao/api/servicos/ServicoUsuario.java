@@ -66,4 +66,8 @@ public class ServicoUsuario {
         }
     }
 
+    public List<Usuario> buscarTodosQuemPossoEnviar(Long usuarioId, String tipoUsuarioDescricao) {
+        return repositorioUsuario.findByHierarquia(usuarioId, tipoUsuarioDescricao);
+    }
+
 }

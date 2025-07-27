@@ -1,7 +1,11 @@
 package com.verde_gestao.api.objetos.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "secao")
@@ -19,5 +23,10 @@ public class Secao {
     private Long secaoid;
 
     private String descricao;
+
+    // Coloquei aqui para deletar todos os usuários ao ser realizada a deleção de uma seção.
+    @JsonIgnore
+    @OneToMany(mappedBy = "secao", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Usuario> usuarios = new ArrayList<>();
 
 }

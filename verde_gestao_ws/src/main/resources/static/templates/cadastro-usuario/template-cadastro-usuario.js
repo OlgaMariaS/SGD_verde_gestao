@@ -33,7 +33,7 @@ function configurarCadastroUsuario(id = null) {
         requisitarAPI(url, metodo, usuario)
             .then(() => {
                 alert("Usuário salvo!");
-                atualizarConteudoHtml(htmlUsuarios, configurarUsuarios);
+                atualizarConteudoHtml(htmlTabelaUsuario, configurarTabelaUsuario);
             });
     });
 }

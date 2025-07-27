@@ -17,6 +17,7 @@ public class InfoUsuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "infousuario_seq", sequenceName = "info_usuario_infousuarioid_seq", allocationSize = 1)
     @EqualsAndHashCode.Include
     private Long infousuarioid;
 
@@ -31,4 +32,5 @@ public class InfoUsuario {
     private LocalDate dataNascimento;
 
     private String celular;
+
 }

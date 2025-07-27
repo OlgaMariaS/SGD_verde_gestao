@@ -16,9 +16,10 @@ public class EnderecoUsuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
+    @SequenceGenerator(name = "enderecousuarioid_seq", sequenceName = "endereco_usuario_enderecousuarioid_seq", allocationSize = 1)
     private Long enderecousuarioid;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuarioid", nullable = false)
     private Usuario usuario;
 
@@ -33,4 +34,5 @@ public class EnderecoUsuario {
     private String estado;
 
     private String cep;
+
 }

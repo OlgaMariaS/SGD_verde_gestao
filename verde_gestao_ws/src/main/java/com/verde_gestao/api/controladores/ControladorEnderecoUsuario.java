@@ -37,4 +37,5 @@ public class ControladorEnderecoUsuario {
         servicoEnderecoUsuario.excluirPorId(id);
         return ResponseEntity.noContent().build();
     }
+
 }

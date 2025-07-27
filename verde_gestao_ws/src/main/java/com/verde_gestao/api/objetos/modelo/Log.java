@@ -15,6 +15,7 @@ public class Log {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "log_seq", sequenceName = "log_logid_seq", allocationSize = 1)
     @EqualsAndHashCode.Include
     private Long logid;
 
@@ -23,4 +24,5 @@ public class Log {
     private Usuario usuario;
 
     private String info;
+
 }

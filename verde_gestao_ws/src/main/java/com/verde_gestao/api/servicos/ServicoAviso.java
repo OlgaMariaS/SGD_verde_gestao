@@ -33,7 +33,7 @@ public class ServicoAviso {
         repositorioAviso.deleteById(id);
     }
 
-    public List<CardAvisoDTO> buscarTodosCardsAvisos() {
-        return repositorioAviso.buscarTodosCardsAvisos();
+    public List<CardAvisoDTO> buscarCards() {
+        return repositorioAviso.findCards();
     }
 }

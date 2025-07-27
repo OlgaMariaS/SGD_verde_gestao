@@ -2,29 +2,31 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Login - Verde Gestão</title>
+    <title>Menu Principal - Verde Gestão</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="d-flex">
     <!-- Menu lateral -->
-    <div id="sidebar" class="bg-light border-right" style="width: 200px; height: 100vh;">
+    <div id="sidebar" class="bg-light border-right invisible" style="width: 300px; height: 100vh;">
         <div class="sidebar-heading p-3">Menu</div>
         <div class="list-group list-group-flush">
             <div class="dropdown-divider"></div>
-            <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Início')">Início</button>
+            <button id="btn-inicio" class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Início')">Início</button>
+            <div class="dropdown-divider"></div>
+            <button id="btn-consultar" class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Consultar as Minhas Solicitações')">Consultar as Minhas Solicitações</button>
+            <button id="btn-consultar-todas" class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Consultar Todas as Solicitações')">Consultar Todas as Solicitações</button>
             <div class="dropdown-divider"></div>
 
-            <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Avisos')">Avisos</button>
-            <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Categoria de Documentos')">Categoria de Documentos</button>
-            <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Consultar Solicitações')">Consultar Solicitações</button>
-            <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Usuários')">Usuários</button>
-            <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Seções')">Seções</button>
+            <div id="header-adm" class="sidebar-heading p-3">Painel de Administração</div>
+            <button id="btn-avisos" class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Avisos')">Avisos</button>
+            <button id="btn-categorias" class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Categoria de Documentos')">Categoria de Documentos</button>
+            <button id="btn-usuarios" class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Usuários')">Usuários</button>
+            <button id="btn-secoes" class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Seções')">Seções</button>
+            <div id="dropdown-divider-btn" class="dropdown-divider"></div>
 
-            <div class="dropdown-divider"></div>
-
-            <button class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Sair')">Sair</button>
+            <button id="btn-sair" class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Sair')">Sair</button>
         </div>
     </div>
 
@@ -40,17 +42,25 @@
 
 <script src="templates/inicio/html-inicio.js"></script>
 <script src="templates/avisos/html-avisos.js"></script>
+<script src="templates/cadastro-solicitacao/html-cadastro-solicitacao.js"></script>
+<script src="templates/cadastro-solicitacao/html-tabela-solicitacao.js"></script>
 <script src="templates/cadastro-tipo-documento/html-cadastro-tipo-documento.js"></script>
+<script src="templates/cadastro-tipo-documento/html-tabela-tipo-documento.js"></script>
 <script src="templates/cadastro-usuario/html-cadastro-usuario.js"></script>
 <script src="templates/cadastro-usuario/html-tabela-usuario.js"></script>
 <script src="templates/cadastro-secao/html-cadastro-secao.js"></script>
+<script src="templates/cadastro-secao/html-tabela-secao.js"></script>
 
 <script src="templates/inicio/template-inicio.js"></script>
 <script src="templates/avisos/template-avisos.js"></script>
 <script src="templates/cadastro-tipo-documento/template-cadastro-tipo-documento.js"></script>
+<script src="templates/cadastro-tipo-documento/template-tabela-tipo-documento.js"></script>
+<script src="templates/cadastro-solicitacao/template-cadastro-solicitacao.js"></script>
+<script src="templates/cadastro-solicitacao/template-tabela-solicitacao.js"></script>
 <script src="templates/cadastro-usuario/template-cadastro-usuario.js"></script>
 <script src="templates/cadastro-usuario/template-tabela-usuario.js"></script>
 <script src="templates/cadastro-secao/template-cadastro-secao.js"></script>
+<script src="templates/cadastro-secao/template-tabela-secao.js"></script>
 
 <script>
     document.addEventListener("load", function() {
@@ -61,31 +71,34 @@
         verificarUsuarioLogado();
     };
 
-    atualizarConteudoHtml(htmlInicio, configurarInicio);
-
     function opcaoSelecionada(opcao) {
         switch (opcao) {
             case 'Início':
-                atualizarConteudoHtml(htmlInicio, configurarInicio);
+                atualizarConteudoHtmlModulo(htmlInicio, configurarInicio);
+                break;
+
+            case 'Consultar as Minhas Solicitações':
+                atualizarConteudoHtmlModulo(htmlTabelaSolicitacao, configurarTabelaSolicitacaoUsuario);
+                break;
+
+            case 'Consultar Todas as Solicitações':
+                atualizarConteudoHtmlModulo(htmlTabelaSolicitacao, configurarTabelaSolicitacao);
                 break;
 
             case 'Avisos':
-                atualizarConteudoHtml(htmlAvisos, configurarAvisos);
+                atualizarConteudoHtmlModulo(htmlAvisos, configurarAvisos);
                 break;
 
             case 'Categoria de Documentos':
-                atualizarConteudoHtml(htmlCadastroTipoDocumento, configurarCadastroTipoDocumento);
-                break;
-
-            case 'Consultar Solicitações':
+                atualizarConteudoHtmlModulo(htmlTabelaTipoDocumento, configurarTabelaTipoDocumento);
                 break;
 
             case 'Usuários':
-                atualizarConteudoHtml(htmlTabelaUsuario, configurarTabelaUsuarios);
+                atualizarConteudoHtmlModulo(htmlTabelaUsuario, configurarTabelaUsuario);
                 break;
 
             case 'Seções':
-                atualizarConteudoHtml(htmlCadastroSecao, configurarCadastroSecao);
+                atualizarConteudoHtmlModulo(htmlTabelaSecao, configurarTabelaSecao);
                 break;
 
             case 'Sair':

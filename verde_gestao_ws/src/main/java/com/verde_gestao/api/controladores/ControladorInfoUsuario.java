@@ -37,4 +37,5 @@ public class ControladorInfoUsuario {
         servicoInfoUsuario.excluirPorId(id);
         return ResponseEntity.noContent().build();
     }
+
 }

@@ -15,8 +15,10 @@ public class TipoSolicitacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "tiposolicitacao_seq", sequenceName = "tipo_solicitacao_tiposolicitacaoid_seq", allocationSize = 1)
     @EqualsAndHashCode.Include
     private Long tiposolicitacaoid;
 
     private String descricao;
+
 }

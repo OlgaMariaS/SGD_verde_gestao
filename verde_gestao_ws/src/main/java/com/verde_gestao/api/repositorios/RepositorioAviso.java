@@ -23,6 +23,6 @@ public interface RepositorioAviso extends JpaRepository<Aviso, Long> {
         JOIN a.autor u
         ORDER BY a.avisoid
     """)
-    List<CardAvisoDTO> buscarTodosCardsAvisos();
+    List<CardAvisoDTO> findCards();
 
 }

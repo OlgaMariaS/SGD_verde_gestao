@@ -179,6 +179,17 @@ ALTER TABLE "log" ALTER COLUMN "logid" SET DEFAULT nextval('log_logid_seq');
 
 -- INSERTS
 
-INSERT INTO tipo_usuario (tipousuarioid, descricao) VALUES (1, 'Administrador'), (2, 'Usuário');
-INSERT INTO secao (secaoid, descricao) VALUES (1, 'Financeiro'), (2, 'TI'), (3, 'RH');
-INSERT INTO usuario (usuarioid, administrador, nome, senha, tipousuarioid, secaoid) VALUES (1, TRUE, 'admin', 'senha123', 1, 1);
+INSERT INTO tipo_usuario (descricao)
+VALUES ('TI'), ('Chefe de Seção'), ('Chefe de Assistente'), ('Chefe Diretor');
+
+INSERT INTO secao (descricao)
+VALUES ('Nenhuma'), ('Matilha Verde'), ('Escoteiros Amarelos');
+
+INSERT INTO usuario (usuarioid, administrador, nome, senha, tipousuarioid, secaoid)
+VALUES (DEFAULT, TRUE, 'admin', 'senha123', 1, 1);
+
+INSERT INTO tipo_solicitacao (descricao)
+VALUES ('Reembolso'), ('Requisição de Documentos'), ('Acesso ao Sistema'), ('Alteração de Dados Cadastrais'), ('Solicitação de Férias'), ('Relatório Gerencial'), ('Solicitação de Equipamento'), ('Cancelamento de Solicitação'), ('Revisão de Pagamento'), ('Outros');
+
+INSERT INTO tipo_documento (descricao, prazo_em_dias, inativo)
+VALUES ('Nota Fiscal', 60, false), ('Contrato', 30, false);

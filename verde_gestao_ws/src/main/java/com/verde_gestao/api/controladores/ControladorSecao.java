@@ -1,6 +1,7 @@
 package com.verde_gestao.api.controladores;
 
 import com.verde_gestao.api.objetos.modelo.Secao;
+import com.verde_gestao.api.objetos.modelo.Usuario;
 import com.verde_gestao.api.servicos.ServicoSecao;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,14 +23,14 @@ public class ControladorSecao {
         return servicoSecao.buscarTodos();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Secao> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.of(servicoSecao.buscarPorId(id));
+    @PostMapping
+    public ResponseEntity<Secao> criar(@RequestBody Secao secao) {
+        return ResponseEntity.ok(servicoSecao.criar(secao));
     }
 
-    @PostMapping
-    public ResponseEntity<Secao> salvar(@RequestBody Secao objeto) {
-        return ResponseEntity.ok(servicoSecao.salvar(objeto));
+    @PutMapping("/{id}")
+    public ResponseEntity<Secao> atualizar(@PathVariable Long id, @RequestBody Secao secao) {
+        return ResponseEntity.ok(servicoSecao.atualizar(id, secao));
     }
 
     @DeleteMapping("/{id}")
@@ -37,4 +38,10 @@ public class ControladorSecao {
         servicoSecao.excluirPorId(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Secao> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.of(servicoSecao.buscarPorId(id));
+    }
+
 }

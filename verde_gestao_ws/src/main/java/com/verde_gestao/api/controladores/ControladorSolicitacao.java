@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/solicitacaos")
+@RequestMapping("/solicitacoes")
 public class ControladorSolicitacao {
 
     private final ServicoSolicitacao servicoSolicitacao;
@@ -28,8 +28,13 @@ public class ControladorSolicitacao {
     }
 
     @PostMapping
-    public ResponseEntity<Solicitacao> salvar(@RequestBody Solicitacao objeto) {
-        return ResponseEntity.ok(servicoSolicitacao.salvar(objeto));
+    public ResponseEntity<Solicitacao> criar(@RequestBody Solicitacao objeto) {
+        return ResponseEntity.ok(servicoSolicitacao.criar(objeto));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Solicitacao> atualizar(@PathVariable Long id, @RequestBody Solicitacao objeto) {
+        return ResponseEntity.ok(servicoSolicitacao.atualizar(id, objeto));
     }
 
     @DeleteMapping("/{id}")
@@ -37,4 +42,10 @@ public class ControladorSolicitacao {
         servicoSolicitacao.excluirPorId(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/minhasSolicitacoes/{usuarioId}")
+    public List<Solicitacao> buscarMinhasSolicitacoes(@PathVariable Long usuarioId) {
+        return servicoSolicitacao.buscarMinhasSolicitacoes(usuarioId);
+    }
+
 }

@@ -29,14 +29,25 @@ function instanciarCardAvisos() {
     const containerAvisos = document.getElementById("lista-avisos");
     containerAvisos.innerHTML = "";
 
-    listaAvisos.forEach(aviso => {
+    listaAvisos.forEach((aviso, index) => {
         const cardAviso = document.createElement("div");
-        cardAviso.className = "card mb-3";
+        cardAviso.className = "card mb-3 invisible"; // já vem invisível.
         cardAviso.innerHTML = htmlCardAviso(aviso);
         containerAvisos.appendChild(cardAviso);
-        configurarBotaoExcluir(aviso)
+        configurarBotaoExcluir(aviso);
+
+        // Aplica o fade-in com atraso baseado no índice.
+        setTimeout(() => {
+            cardAviso.classList.remove("invisible");
+            cardAviso.classList.add("fade-in");
+
+            setTimeout(() => {
+                cardAviso.classList.remove("fade-in");
+            }, tempoFade);
+        }, index * delayFade); // atraso entre cada card.
     });
 }
+
 
 function configurarBotaoExcluir(aviso) {
     const botaoExcluir = document.getElementById(`botao-excluir-${aviso.id}`);
@@ -44,9 +55,9 @@ function configurarBotaoExcluir(aviso) {
     const administrador = usuarioLogado.administrador;
 
     if (!administrador) {
-        botaoExcluir.style.visibility = "hidden";
+        botaoExcluir.style.display = "none";
     } else {
-        botaoExcluir.style.visibility = "visible";
+        botaoExcluir.style.display = "inline-block";
     }
 }
 

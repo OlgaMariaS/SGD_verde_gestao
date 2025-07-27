@@ -37,4 +37,5 @@ public class ControladorTipoUsuario {
         servicoTipoUsuario.excluirPorId(id);
         return ResponseEntity.noContent().build();
     }
+
 }

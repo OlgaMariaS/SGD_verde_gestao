@@ -18,7 +18,7 @@ function htmlCadastroSecao() {
                             <input type="text" class="form-control" id="nome" placeholder="Digite o nome da seção" required />
                         </div>
         
-                        <button type="submit" class="btn btn-primary">Cadastrar</button>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
                     </form>
                 </div>
             </div>

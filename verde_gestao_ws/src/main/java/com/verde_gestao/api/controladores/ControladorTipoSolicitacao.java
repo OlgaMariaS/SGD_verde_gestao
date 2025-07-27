@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/tipoSolicitacaos")
+@RequestMapping("/tipoSolicitacoes")
 public class ControladorTipoSolicitacao {
 
     private final ServicoTipoSolicitacao servicoTipoSolicitacao;
@@ -37,4 +37,5 @@ public class ControladorTipoSolicitacao {
         servicoTipoSolicitacao.excluirPorId(id);
         return ResponseEntity.noContent().build();
     }
+
 }
