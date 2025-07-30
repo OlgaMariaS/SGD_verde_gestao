@@ -6,7 +6,11 @@ plugins {
 }
 
 group = 'com.verde_gestao'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0'
+
+war {
+	archiveBaseName = 'verde_gestao'
+}
 
 java {
 	toolchain {

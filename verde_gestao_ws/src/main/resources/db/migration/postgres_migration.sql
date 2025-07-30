@@ -115,7 +115,7 @@ ALTER TABLE "aviso"
         FOREIGN KEY ("autor_usuarioid") REFERENCES "usuario" ("usuarioid") ON DELETE CASCADE;
 
 ALTER TABLE "documento"
-    ADD FOREIGN KEY ("solicitacaoid") REFERENCES "solicitacao" ("solicitacaoid")
+    ADD FOREIGN KEY ("solicitacaoid") REFERENCES "solicitacao" ("solicitacaoid");
 
 ALTER TABLE "endereco_usuario"
     ADD CONSTRAINT "endereco_usuario_usuarioid_foreign"
