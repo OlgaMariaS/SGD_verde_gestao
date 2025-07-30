@@ -8,7 +8,6 @@ function configurarLogin() {
 }
 
 function requisitarLogin(nomeLogin, senhaLogin) {
-    // Talvez fosse mais prudente criar um sistema de handlers e daí lembrar o Login pela sessão do servidor, mas foda-se.
     requisitarAPI(`/usuarios/verificarLogin?nome=${encodeURIComponent(nomeLogin)}&senha=${encodeURIComponent(senhaLogin)}`)
         .then(usuarioLogado => {
             salvarLocalmente('usuarioLogado', usuarioLogado)
@@ -16,7 +15,6 @@ function requisitarLogin(nomeLogin, senhaLogin) {
         })
         .catch(erro => {
             console.error(erro);
-            // É, eu sei... é gambiarra.
             if (erro.message.includes("404")) {
                 alert("Usuário ou senha inválidos!");
                 return;

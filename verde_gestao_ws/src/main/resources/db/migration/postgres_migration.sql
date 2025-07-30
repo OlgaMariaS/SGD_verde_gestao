@@ -88,14 +88,8 @@ CREATE TABLE "aviso" (
 
 CREATE TABLE "documento" (
     "documentoid" BIGINT PRIMARY KEY,
-    "tipodocumentoid" BIGINT NOT NULL,
-    "arquivo" bytea NOT NULL
-);
-
-CREATE TABLE "documento_solicitacao" (
     "solicitacaoid" BIGINT NOT NULL,
-    "documentoid" BIGINT NOT NULL,
-    PRIMARY KEY ("solicitacaoid", "documentoid")
+    "arquivo" bytea NOT NULL
 );
 
 -- FOREIGN KEYS
@@ -121,11 +115,7 @@ ALTER TABLE "aviso"
         FOREIGN KEY ("autor_usuarioid") REFERENCES "usuario" ("usuarioid") ON DELETE CASCADE;
 
 ALTER TABLE "documento"
-    ADD FOREIGN KEY ("tipodocumentoid") REFERENCES "tipo_documento" ("tipodocumentoid");
-
-ALTER TABLE "documento_solicitacao"
-    ADD FOREIGN KEY ("solicitacaoid") REFERENCES "solicitacao" ("solicitacaoid"),
-    ADD FOREIGN KEY ("documentoid") REFERENCES "documento" ("documentoid");
+    ADD FOREIGN KEY ("solicitacaoid") REFERENCES "solicitacao" ("solicitacaoid")
 
 ALTER TABLE "endereco_usuario"
     ADD CONSTRAINT "endereco_usuario_usuarioid_foreign"

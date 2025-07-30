@@ -46,4 +46,7 @@ public class Solicitacao {
     @OneToMany(mappedBy = "solicitacao")
     private List<Comentario> comentarios;
 
+    @OneToMany(mappedBy = "solicitacao")
+    private List<Documento> documentos;
+
 }

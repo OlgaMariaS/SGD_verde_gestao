@@ -1,5 +1,4 @@
 /* Básico */
-
 body {
     background-color: #f8f9fa;
 }
@@ -18,7 +17,6 @@ body {
 }
 
 /* Efeitos de fade-in e fade-out (se for alterar o tempo tem que mudar no código também) */
-
 .fade-out {
     opacity: 0;
     transition: opacity 300ms ease-out;

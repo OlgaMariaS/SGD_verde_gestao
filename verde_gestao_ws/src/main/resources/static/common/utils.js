@@ -84,7 +84,6 @@ function requisitarAPI(url, metodo = "GET", body = null) {
         })
         .catch(erro => {
             console.error('Erro na requisição:', erro);
-            alert(erro.message); // TODO: remover ao finalizar o sistema.
             throw erro;
         });
 }
@@ -101,6 +100,15 @@ function verificarUsuarioLogado() {
 }
 
 function mostraBotoesAdministrador(usuarioLogado) {
+    if (usuarioLogado.tipoUsuario === 'Chefe Diretor') {
+        ['btn-categorias', 'btn-usuarios', 'btn-secoes'].forEach(id => {
+            const botao = document.getElementById(id);
+            if (botao) botao.style.display = 'none';
+        });
+
+        return;
+    }
+
     if (!usuarioLogado.administrador) {
         ['btn-avisos', 'btn-categorias', 'btn-usuarios', 'btn-secoes', 'dropdown-divider-btn', 'btn-consultar-todas', 'header-adm'].forEach(id => {
             const botao = document.getElementById(id);
