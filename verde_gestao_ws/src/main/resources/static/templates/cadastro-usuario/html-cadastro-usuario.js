@@ -20,7 +20,7 @@ function htmlCadastroUsuario() {
                 </div>
                 <div class="form-group">
                     <label for="tipousuarioid">Tipo de Usuário</label>
-                    <select id="tipousuarioid" class="form-control"></select>
+                    <select id="tipousuarioid" class="form-control" required></select>
                 </div>
                 <div class="form-group">
                     <label for="secaoid">Seção</label>

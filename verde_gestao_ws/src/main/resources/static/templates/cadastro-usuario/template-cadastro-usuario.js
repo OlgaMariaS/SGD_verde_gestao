@@ -7,7 +7,7 @@ function configurarCadastroUsuario(id = null) {
                 document.getElementById("nome").value = usuario.nome;
                 document.getElementById("senha").value = usuario.senha;
                 document.getElementById("administrador").value = usuario.administrador ? "1" : "0";
-                document.getElementById("tipousuarioid").value = usuario.tipoUsuario?.tipousuarioid;
+                document.getElementById("tipousuarioid").value = usuario.tipousuario?.tipousuarioid;
                 document.getElementById("secaoid").value = usuario.secao?.secaoid;
             });
     }
@@ -19,7 +19,7 @@ function configurarCadastroUsuario(id = null) {
             nome: document.getElementById("nome").value,
             senha: document.getElementById("senha").value,
             administrador: document.getElementById("administrador").value === "1",
-            tipoUsuario: {
+            tipousuario: {
                 tipousuarioid: parseInt(document.getElementById("tipousuarioid").value)
             },
             secao: {

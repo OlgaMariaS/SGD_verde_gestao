@@ -17,7 +17,7 @@ public interface RepositorioUsuario extends JpaRepository<Usuario, Long> {
     @Query("""
         SELECT u
         FROM Usuario u
-        JOIN u.tipoUsuario t
+        JOIN u.tipousuario t
         WHERE (
             u.usuarioid = :usuarioId
             OR LOWER(:tipoUsuarioDescricao) = 'ti'

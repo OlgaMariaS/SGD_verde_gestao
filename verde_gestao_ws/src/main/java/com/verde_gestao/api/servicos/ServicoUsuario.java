@@ -39,7 +39,7 @@ public class ServicoUsuario {
         existente.setSenha(usuarioAtualizado.getSenha());
         existente.setAdministrador(usuarioAtualizado.isAdministrador());
         existente.setSecao(usuarioAtualizado.getSecao());
-        existente.setTipoUsuario(usuarioAtualizado.getTipoUsuario());
+        existente.setTipousuario(usuarioAtualizado.getTipousuario());
 
         return repositorioUsuario.save(existente);
     }
@@ -57,7 +57,7 @@ public class ServicoUsuario {
                     usuario.getUsuarioid(),
                     usuario.isAdministrador(),
                     usuario.getNome(),
-                    usuario.getTipoUsuario().getDescricao(),
+                    usuario.getTipousuario().getDescricao(),
                     usuario.getSecao().getDescricao()
             );
             return ResponseEntity.ok(dto);

@@ -100,7 +100,7 @@ function verificarUsuarioLogado() {
 }
 
 function mostraBotoesAdministrador(usuarioLogado) {
-    if (usuarioLogado.tipoUsuario === 'Chefe Diretor') {
+    if (usuarioLogado.tipousuario === 'Chefe Diretor') {
         ['btn-categorias', 'btn-usuarios', 'btn-secoes'].forEach(id => {
             const botao = document.getElementById(id);
             if (botao) botao.style.display = 'none';

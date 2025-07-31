@@ -26,7 +26,7 @@ public class Usuario {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "tipousuarioid")
-    private TipoUsuario tipoUsuario;
+    private TipoUsuario tipousuario;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "secaoid")

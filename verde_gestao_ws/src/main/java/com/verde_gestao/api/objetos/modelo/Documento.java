@@ -1,5 +1,6 @@
 package com.verde_gestao.api.objetos.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,9 +20,16 @@ public class Documento {
     private Long documentoid;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "tipodocumentoid")
+    private TipoDocumento tipodocumento;
+
+    @JsonIgnore
+    @ManyToOne(optional = false)
     @JoinColumn(name = "solicitacaoid")
     private Solicitacao solicitacao;
 
+    @JsonIgnore
+    @Column(name = "arquivo", columnDefinition = "bytea")
     private byte[] arquivo;
 
 }

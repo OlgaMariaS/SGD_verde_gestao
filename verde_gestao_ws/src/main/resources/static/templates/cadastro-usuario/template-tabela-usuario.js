@@ -9,7 +9,7 @@ function configurarTabelaUsuario() {
         campos: [
             { nome: "nome" },
             { nome: "administrador", render: u => u.administrador ? "Sim" : "Não" },
-            { nome: "tipoUsuario", render: u => u.tipoUsuario?.descricao || "-" },
+            { nome: "tipousuario", render: u => u.tipousuario?.descricao || "-" },
             { nome: "secao", render: u => u.secao?.descricao || "-" }
         ]
     });

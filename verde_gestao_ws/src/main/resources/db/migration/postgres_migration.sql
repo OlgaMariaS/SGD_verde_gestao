@@ -88,6 +88,7 @@ CREATE TABLE "aviso" (
 
 CREATE TABLE "documento" (
     "documentoid" BIGINT PRIMARY KEY,
+    "tipodocumentoid" BIGINT NOT NULL,
     "solicitacaoid" BIGINT NOT NULL,
     "arquivo" bytea NOT NULL
 );
@@ -115,6 +116,7 @@ ALTER TABLE "aviso"
         FOREIGN KEY ("autor_usuarioid") REFERENCES "usuario" ("usuarioid") ON DELETE CASCADE;
 
 ALTER TABLE "documento"
+    ADD FOREIGN KEY ("tipodocumentoid") REFERENCES "tipo_documento" ("tipodocumentoid"),
     ADD FOREIGN KEY ("solicitacaoid") REFERENCES "solicitacao" ("solicitacaoid");
 
 ALTER TABLE "endereco_usuario"

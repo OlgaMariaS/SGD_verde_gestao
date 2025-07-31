@@ -4,7 +4,9 @@ import com.verde_gestao.api.objetos.modelo.Documento;
 import com.verde_gestao.api.servicos.ServicoDocumento;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
@@ -44,5 +46,25 @@ public class ControladorDocumento {
         servicoDocumento.excluirPorId(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/download/{id}")
+    public ResponseEntity<byte[]> download(@PathVariable Long id) {
+        return servicoDocumento.download(id);
+    }
+
+    @PostMapping("/upload")
+    public ResponseEntity<Void> upload(
+            @RequestParam("arquivo") MultipartFile file,
+            @RequestParam("tipodocumentoid") Long tipoDocumentoId,
+            @RequestParam("solicitacaoid") Long solicitacaoId) throws IOException {
+
+        System.out.println("tipodocumentoid: " + tipoDocumentoId);
+        System.out.println("solicitacaoid: " + solicitacaoId);
+        System.out.println("arquivo nulo? " + (file == null));
+        System.out.println("arquivo vazio? " + file.isEmpty());
+
+        return servicoDocumento.upload(file, tipoDocumentoId, solicitacaoId);
+    }
+
 
 }
