@@ -96,8 +96,8 @@ CREATE TABLE "documento" (
 -- FOREIGN KEYS
 
 ALTER TABLE "usuario"
-    ADD FOREIGN KEY ("tipousuarioid") REFERENCES "tipo_usuario" ("tipousuarioid"),
-    ADD FOREIGN KEY ("secaoid") REFERENCES "secao" ("secaoid");
+    ADD FOREIGN KEY ("tipousuarioid") REFERENCES "tipo_usuario" ("tipousuarioid") ON DELETE CASCADE,
+    ADD FOREIGN KEY ("secaoid") REFERENCES "secao" ("secaoid") ON DELETE CASCADE;
 
 ALTER TABLE "solicitacao"
     ADD FOREIGN KEY ("tiposolicitacaoid") REFERENCES "tipo_solicitacao" ("tiposolicitacaoid"),
@@ -116,8 +116,8 @@ ALTER TABLE "aviso"
         FOREIGN KEY ("autor_usuarioid") REFERENCES "usuario" ("usuarioid") ON DELETE CASCADE;
 
 ALTER TABLE "documento"
-    ADD FOREIGN KEY ("tipodocumentoid") REFERENCES "tipo_documento" ("tipodocumentoid"),
-    ADD FOREIGN KEY ("solicitacaoid") REFERENCES "solicitacao" ("solicitacaoid");
+    ADD FOREIGN KEY ("tipodocumentoid") REFERENCES "tipo_documento" ("tipodocumentoid") ON DELETE CASCADE,
+    ADD FOREIGN KEY ("solicitacaoid") REFERENCES "solicitacao" ("solicitacaoid") ON DELETE CASCADE;
 
 ALTER TABLE "endereco_usuario"
     ADD CONSTRAINT "endereco_usuario_usuarioid_foreign"
@@ -174,11 +174,11 @@ ALTER TABLE "log" ALTER COLUMN "logid" SET DEFAULT nextval('log_logid_seq');
 INSERT INTO tipo_usuario (descricao)
 VALUES ('TI'), ('Chefe de Seção'), ('Chefe de Assistente'), ('Chefe Diretor');
 
-INSERT INTO secao (descricao)
-VALUES ('Nenhuma'), ('Matilha Verde'), ('Escoteiros Amarelos');
+INSERT INTO secao (secaoid, descricao)
+VALUES (0, 'Nenhuma');
 
 INSERT INTO usuario (usuarioid, administrador, nome, senha, tipousuarioid, secaoid)
-VALUES (DEFAULT, TRUE, 'admin', 'senha123', 1, 1);
+VALUES (0, TRUE, 'root', 'root', 1, 0);
 
 INSERT INTO tipo_solicitacao (descricao)
 VALUES ('Reembolso'), ('Requisição de Documentos'), ('Acesso ao Sistema'), ('Alteração de Dados Cadastrais'), ('Solicitação de Férias'), ('Relatório Gerencial'), ('Solicitação de Equipamento'), ('Cancelamento de Solicitação'), ('Revisão de Pagamento'), ('Outros');

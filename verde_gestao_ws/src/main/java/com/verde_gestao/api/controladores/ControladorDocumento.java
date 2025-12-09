@@ -58,11 +58,6 @@ public class ControladorDocumento {
             @RequestParam("tipodocumentoid") Long tipoDocumentoId,
             @RequestParam("solicitacaoid") Long solicitacaoId) throws IOException {
 
-        System.out.println("tipodocumentoid: " + tipoDocumentoId);
-        System.out.println("solicitacaoid: " + solicitacaoId);
-        System.out.println("arquivo nulo? " + (file == null));
-        System.out.println("arquivo vazio? " + file.isEmpty());
-
         return servicoDocumento.upload(file, tipoDocumentoId, solicitacaoId);
     }
 

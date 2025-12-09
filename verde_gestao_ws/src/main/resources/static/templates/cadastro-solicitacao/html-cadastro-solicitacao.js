@@ -26,7 +26,7 @@ function htmlCadastroSolicitacao() {
                     </div>
                 
                     <div class="me-2 mt-2">
-                        <button type="button" class="btn btn-primary btn-sm" onclick="anexarDocumento()">Adicionar Documento</button>
+                        <button type="button" class="btn btn-primary" onclick="anexarDocumento()">Adicionar Documento</button>
                     </div>
                 </div>
                 
@@ -45,9 +45,11 @@ function htmlCadastroSolicitacao() {
                     <textarea class="form-control" id="descricao" rows="3" required></textarea>
                 </div>
                 
-                <button type="submit" name="acao" value="salvar" class="btn btn-primary">Salvar</button>
-                <button type="submit" name="acao" value="resolver" class="btn btn-success">Marcar Como Resolvida</button>
-                <button type="submit" name="acao" value="cancelar" class="btn btn-danger">Marcar Como Cancelada</button>
+                <div class="button-group">
+                    <button type="submit" name="acao" value="salvar" class="btn btn-primary">Salvar</button>
+                    <button type="submit" name="acao" value="resolver" class="btn btn-success ml-2">Marcar Como Resolvida</button>
+                    <button type="submit" name="acao" value="cancelar" class="btn btn-danger ml-2">Marcar Como Cancelada</button>
+                </div>
             </form>
         </div>
         

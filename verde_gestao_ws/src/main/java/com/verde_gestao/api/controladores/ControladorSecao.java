@@ -35,6 +35,10 @@ public class ControladorSecao {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluirPorId(@PathVariable Long id) {
+        if (id == 0) {
+            return ResponseEntity.badRequest().build();
+        }
+
         servicoSecao.excluirPorId(id);
         return ResponseEntity.noContent().build();
     }

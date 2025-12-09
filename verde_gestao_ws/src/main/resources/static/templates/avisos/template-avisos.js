@@ -43,8 +43,8 @@ function instanciarCardAvisos() {
 
             setTimeout(() => {
                 cardAviso.classList.remove("fade-in");
-            }, tempoFade);
-        }, index * delayFade); // atraso entre cada card.
+            }, TEMPO_FADE);
+        }, index * ATRASO_FADE); // atraso entre cada card.
     });
 }
 

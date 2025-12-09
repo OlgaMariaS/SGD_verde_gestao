@@ -1,6 +1,22 @@
 /* Básico */
+html, body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #ffffff, #dcdcdc);
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    font-family: "Lato", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+html {
+    min-height: 125vh;
+}
+
 body {
-    background-color: #f8f9fa;
+    height: 100%;
+    padding: 32px;
 }
 
 .login-container {
@@ -14,6 +30,22 @@ body {
 
 .login-title {
     margin-bottom: 20px;
+}
+
+.d-site-title {
+    display: flex;
+    align-items: center;  /* Isso alinha a imagem e o texto verticalmente no centro */
+    padding: 16px
+}
+
+.d-site-title img {
+    height: 6em;  /* Faz a altura da imagem igual à altura da fonte do texto */
+    margin-right: 10px; /* Espaçamento entre a imagem e o texto */
+}
+
+.d-site-title h1 {
+    margin: 0;  /* Remove a margem padrão do h1 */
+    font-size: 4em;
 }
 
 /* Efeitos de fade-in e fade-out (se for alterar o tempo tem que mudar no código também) */
@@ -31,9 +63,26 @@ body {
     opacity: 0;
 }
 
+.button-block {
+    border: 1px solid #e3e3e3;
+}
+
+.button-group {
+    display: inline-flex;      /* Flexbox com largura adaptável ao conteúdo */
+    justify-content: center;   /* Centraliza os botões horizontalmente */
+    align-items: center;       /* Centraliza os botões verticalmente */
+    padding: 4px;
+    border: none;
+    background: rgba(0, 0, 0, 0.10);
+    border-radius: 4px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
 /* Remove estilos padrões da tabela do Bootstrap */
 .table {
     background-color: transparent;
+    border: 1px solid #e3e3e3;
     border-collapse: separate !important;
     border-spacing: 0;
     width: 100%;
@@ -48,13 +97,6 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     background: white;
     margin-top: 1rem;
-}
-
-/* Cabeçalho moderno */
-.table thead {
-    background-color: #009879;
-    color: white;
-    font-weight: bold;
 }
 
 .table thead th {
@@ -72,9 +114,12 @@ body {
     font-size: 15px;
 }
 
-/* Zebra striping */
+/* Zebrinha */
 .table tbody tr:nth-child(even) {
     background-color: #f9f9f9;
+}
+.table tbody tr:nth-child(odd){
+    background-color: #ffffff;
 }
 
 /* Hover */
@@ -84,14 +129,26 @@ body {
 
 /* Linha ativa */
 .table tbody tr.table-active {
-    background-color: #e0f7f4 !important;
-    color: #00745f;
+    background-color: #d0efff !important;
+    color: #000000;
 }
 
-/* Borda arredondada no topo */
-.table thead th:first-child {
-    border-top-left-radius: 12px;
+.list-group-item {
+    border: 1px solid #ddd;
+    transition: border 0.3s ease, box-shadow 0.2s ease;
 }
-.table thead th:last-child {
-    border-top-right-radius: 12px;
+
+.list-group-item:focus {
+    border: 2px solid #28a745;
+    outline: none;
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+}
+
+.list-group-item:focus-visible {
+    border: 2px solid #28a745;
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+}
+
+.list-group-item:focus {
+    outline: none;
 }

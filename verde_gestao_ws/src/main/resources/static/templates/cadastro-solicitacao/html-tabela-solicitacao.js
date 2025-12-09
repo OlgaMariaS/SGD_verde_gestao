@@ -2,7 +2,10 @@ function htmlTabelaSolicitacao() {
     return `
         <div class="container mt-4">
             <h1>Solicitações</h1>
-            <button class="btn btn-success mb-3" id="btn-novo">Nova Solicitação</button>
+            
+            <div class="button-group">
+                <button class="btn btn-success" id="btn-novo">Nova Solicitação</button>
+            </div>
 
             <table class="table table-hover" id="tabela-solicitacoes">
                 <thead class="thead-dark">

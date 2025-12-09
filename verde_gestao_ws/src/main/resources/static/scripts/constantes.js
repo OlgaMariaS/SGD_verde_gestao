@@ -1,0 +1,2 @@
+const TEMPO_FADE = 300;
+const ATRASO_FADE = 1250;

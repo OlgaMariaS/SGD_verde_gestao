@@ -3,7 +3,7 @@ function configurarCadastroTipoDocumento(id = null) {
         requisitarAPI(`/tipoDocumentos/${id}`)
             .then(doc => {
                 document.getElementById("nome").value = doc.descricao;
-                document.getElementById("prazo").value = doc.prazo_em_dias;
+                document.getElementById("prazo").value = doc.prazoEmDias;
                 document.getElementById("ativado").value = doc.inativo ? "0" : "1";
             });
     }

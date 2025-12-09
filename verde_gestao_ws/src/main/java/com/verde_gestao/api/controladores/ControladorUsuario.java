@@ -40,6 +40,10 @@ public class ControladorUsuario {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluirPorId(@PathVariable Long id) {
+        if (id == 0) {
+            return ResponseEntity.badRequest().build();
+        }
+
         servicoUsuario.excluirPorId(id);
         return ResponseEntity.noContent().build();
     }
