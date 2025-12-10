@@ -53,7 +53,7 @@ function htmlCadastroSolicitacao() {
             </form>
         </div>
         
-        <div class="container mt-4">            
+        <div class="container mt-4">      
             <div id="lista-documentos">
                 <!-- Vai ter documentos aqui dentro... -->
             </div>

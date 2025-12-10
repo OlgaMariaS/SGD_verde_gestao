@@ -6,6 +6,7 @@ function verificarUsuarioLogado() {
         return;
     }
 
+    fadeInTitle()
     fadeInMenu(usuarioLogado);
 }
 
@@ -42,6 +43,19 @@ function fadeInMenu(usuarioLogado) {
     }, TEMPO_FADE);
 
     atualizarConteudoHtml(htmlInicio, configurarInicio);
+}
+
+function fadeInTitle() {
+    const titulo = document.getElementById("title");
+
+    setTimeout(() => {
+        titulo.classList.remove("invisible");
+        titulo.classList.add("fade-in");
+
+        setTimeout(() => {
+            titulo.classList.remove("fade-in");
+        }, TEMPO_FADE);
+    }, TEMPO_FADE);
 }
 
 function deslogarUsuario() {
