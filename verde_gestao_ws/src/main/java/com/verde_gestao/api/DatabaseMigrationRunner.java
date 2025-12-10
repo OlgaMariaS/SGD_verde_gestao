@@ -8,7 +8,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 
 @Component
 public class DatabaseMigrationRunner implements ApplicationRunner {
@@ -31,8 +30,8 @@ public class DatabaseMigrationRunner implements ApplicationRunner {
             System.out.println("⚠️ Migração já aplicada. Pulando execução.");
             return;
         }
-
-        String sql = Files.readString(migrationScript.getFile().toPath(), StandardCharsets.UTF_8);
+        
+        String sql = new String(migrationScript.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
 
         String[] statements = sql.split(";");
 
@@ -50,5 +49,4 @@ public class DatabaseMigrationRunner implements ApplicationRunner {
 
         System.out.println("✅ Migrações executadas com sucesso!");
     }
-
 }
