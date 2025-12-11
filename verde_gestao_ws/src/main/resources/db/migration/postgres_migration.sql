@@ -100,7 +100,7 @@ ALTER TABLE "usuario"
     ADD FOREIGN KEY ("secaoid") REFERENCES "secao" ("secaoid") ON DELETE CASCADE;
 
 ALTER TABLE "solicitacao"
-    ADD FOREIGN KEY ("tiposolicitacaoid") REFERENCES "tipo_solicitacao" ("tiposolicitacaoid"),
+    ADD FOREIGN KEY ("tiposolicitacaoid") REFERENCES "tipo_solicitacao" ("tiposolicitacaoid") ON DELETE CASCADE,
     ADD CONSTRAINT "solicitacao_criador_usuarioid_foreign"
         FOREIGN KEY ("criador_usuarioid") REFERENCES "usuario" ("usuarioid") ON DELETE CASCADE,
     ADD CONSTRAINT "solicitacao_responsavel_usuarioid_foreign"
@@ -180,8 +180,8 @@ VALUES (0, 'Nenhuma');
 INSERT INTO usuario (usuarioid, administrador, nome, senha, tipousuarioid, secaoid)
 VALUES (0, TRUE, 'root', 'root', 1, 0);
 
-INSERT INTO tipo_solicitacao (descricao)
-VALUES ('Reembolso'), ('Requisição de Documentos'), ('Acesso ao Sistema'), ('Alteração de Dados Cadastrais'), ('Solicitação de Férias'), ('Relatório Gerencial'), ('Solicitação de Equipamento'), ('Cancelamento de Solicitação'), ('Revisão de Pagamento'), ('Outros');
+INSERT INTO tipo_solicitacao (tiposolicitacaoid, descricao)
+VALUES (0, 'Outros');
 
-INSERT INTO tipo_documento (descricao, prazo_em_dias, inativo)
-VALUES ('Nota Fiscal', 60, false), ('Contrato', 30, false);
+INSERT INTO tipo_documento (tipodocumentoid, descricao, prazo_em_dias, inativo)
+VALUES (0, 'Não Especificado', 60, false);

@@ -2,6 +2,7 @@ package com.verde_gestao.api.servicos;
 
 import com.verde_gestao.api.objetos.modelo.TipoSolicitacao;
 import com.verde_gestao.api.repositorios.RepositorioTipoSolicitacao;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,8 +25,17 @@ public class ServicoTipoSolicitacao {
         return repositorioTipoSolicitacao.findById(id);
     }
 
-    public TipoSolicitacao salvar(TipoSolicitacao objeto) {
-        return repositorioTipoSolicitacao.save(objeto);
+    public TipoSolicitacao criar(TipoSolicitacao tipoSolicitacao) {
+        tipoSolicitacao.setTiposolicitacaoid(null);
+        return repositorioTipoSolicitacao.save(tipoSolicitacao);
+    }
+
+    public TipoSolicitacao atualizar(Long id, TipoSolicitacao tipoSolicitacaoAtualizado) {
+        TipoSolicitacao existente = repositorioTipoSolicitacao.findById(id).orElseThrow(() -> new EntityNotFoundException("Seção não encontrada com ID: " + id));
+
+        existente.setDescricao(tipoSolicitacaoAtualizado.getDescricao());
+
+        return repositorioTipoSolicitacao.save(existente);
     }
 
     public void excluirPorId(Long id) {

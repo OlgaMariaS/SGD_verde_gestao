@@ -31,7 +31,8 @@
                 <div id="list-adm" class="button-block">
                     <div id="header-adm" class="sidebar-heading p-3">Painel de Administração</div>
                     <button id="btn-avisos" class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Avisos')">Avisos</button>
-                    <button id="btn-categorias" class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Categoria de Documentos')">Categoria de Documentos</button>
+                    <button id="btn-categorias-documentos" class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Categoria de Documentos')">Categoria de Documentos</button>
+                    <button id="btn-categorias-solicitacoes" class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Categoria de Solicitações')">Categoria de Solicitações</button>
                     <button id="btn-consultar-todas" class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Consultar Todas as Solicitações')">Consultar Todas as Solicitações</button>
                     <button id="btn-usuarios" class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Usuários')">Usuários</button>
                     <button id="btn-secoes" class="list-group-item list-group-item-action" onclick="opcaoSelecionada('Seções')">Seções</button>
@@ -65,6 +66,8 @@
 <script src="templates/cadastro-solicitacao/html-tabela-solicitacao.js"></script>
 <script src="templates/cadastro-tipo-documento/html-cadastro-tipo-documento.js"></script>
 <script src="templates/cadastro-tipo-documento/html-tabela-tipo-documento.js"></script>
+<script src="templates/cadastro-tipo-solicitacao/html-cadastro-tipo-solicitacao.js"></script>
+<script src="templates/cadastro-tipo-solicitacao/html-tabela-tipo-solicitacao.js"></script>
 <script src="templates/cadastro-usuario/html-cadastro-usuario.js"></script>
 <script src="templates/cadastro-usuario/html-tabela-usuario.js"></script>
 <script src="templates/cadastro-secao/html-cadastro-secao.js"></script>
@@ -74,6 +77,8 @@
 <script src="templates/avisos/template-avisos.js"></script>
 <script src="templates/cadastro-tipo-documento/template-cadastro-tipo-documento.js"></script>
 <script src="templates/cadastro-tipo-documento/template-tabela-tipo-documento.js"></script>
+<script src="templates/cadastro-tipo-solicitacao/template-cadastro-tipo-solicitacao.js"></script>
+<script src="templates/cadastro-tipo-solicitacao/template-tabela-tipo-solicitacao.js"></script>
 <script src="templates/cadastro-solicitacao/template-cadastro-solicitacao.js"></script>
 <script src="templates/cadastro-solicitacao/template-tabela-solicitacao.js"></script>
 <script src="templates/cadastro-usuario/template-cadastro-usuario.js"></script>
@@ -110,6 +115,10 @@
 
             case 'Categoria de Documentos':
                 atualizarConteudoHtmlModulo(htmlTabelaTipoDocumento, configurarTabelaTipoDocumento);
+                break;
+
+            case 'Categoria de Solicitações':
+                atualizarConteudoHtmlModulo(htmlTabelaTipoSolicitacao, configurarTabelaTipoSolicitacao);
                 break;
 
             case 'Usuários':
